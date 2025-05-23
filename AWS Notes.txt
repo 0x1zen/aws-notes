@@ -1,0 +1,441 @@
+
+Module 1 : -Introduction To Amazon Web Services
+
+Episode 1 :-
+
+The Client Server Model :-
+
+-In the IT world client is the end user and server is the machine which responds to the clients requests.
+-Requests can be anything such as getting the weather data from south africa , a kittens video from youtube etc.
+-For eg.
+The Coffee Shop :-
+-Eddie is in a coffee shop aking Morgan the employee(Barista) of the shop that he wants a coffee.
+-Eddie here is a Client and is requesting Morgan The Server to serve his request.
+
+-In the AWS , this server is called as Amazon Elastic Compute Cloud (EC2).
+-An EC2 instace, a virtual server.
+-The example for eddie and morgan was very simple in itself, but in a mature business level solution , it can get beautifully complex.
+
+
+You Only Pay For What You Use (Concept):-
+
+-This concept is similar to a coffee shop.
+-Morgan being the employee of the the coffee shop gets paid when they are working.
+-They will not be paid when they are on a vacation xD.
+
+-The Owner decides how many baristas are needed , and pays them on hourly basis.
+-Now lets say the coffee shop is launching a new coffee(The Pumpkin Monster),and the owner has hired lot of baristas for a sudden rush of clients to handle.
+-But,that not be the case for a entire day , most of the day can be a few or less customers.
+-This can be a issue in a coffee shop or in real world data centers.
+
+The Solution By AWS:-
+
+-When you need baristas or instances , you just click a button and you have them , and when you dont need them , you click a button and they are gone.
+
+Episode 2 :-
+
+Cloud Computing :-
+
+-Cloud computing is the on demand delivery of the IT resources over the internet with pay-as-you-go pricing.
+-On demand delivery means AWS has the resources you need when you need them.
+-You dont tell them in advance that you will need them.
+-All of a sudden you need 200 instances , just a few clicks and you get them.
+-All of a sudden you need 2000TB of storage , just few clicks and you get it.
+-If you dont need it , you just return it and stop paying for it immediately.
+
+Undifferentiated Heavy Lifting Of IT :-
+
+For eg.
+
+-Your company works with a MYSQL server.
+-Now setting up a MYSQL engine on a server is not what differentiates you from your competitors , but how  efficiently you store your data in your database does.
+
+-In AWS this is called as undifferentiated heavy lifting of IT.
+-Tasks that are common , often repetitive and ultimately time consuming.
+-These are the tasks that aws wants to help you with m so you can focus more on what makes you unique.
+
+Module 1 Assessment Question Notes:-
+
+Question 1 :-
+
+"Deploying applications connected to on-premises infrastructure is a sample use case for a hybrid cloud deployment."
+
+Q.What does the above statement mean?
+
+What is a hybrid cloud deployment?
+-A Hybrid cloud is a computing environment that combines :-
+1)On-premises infrasturcture(servers/data centers physically located at your site).
+2)with Public cloud Services(like AWS,AZURE,GCP)
+3)and allows Data and applications to be shared or integrated between your on-premises systems and the cloud systems.
+
+What does the statement say?
+-The statement defines a use case for hybrid deployment.
+-It means a application is deployed on cloud platform still needs to connect with your existing on-premises systems such as :-
+a)Database hosted in your companies data center.
+b)Internal API's 
+c)Legacy Systems:-
+-an old or outdated software platform that a company uses to manage its core business processes, such as:
+1)Inventory management
+2)Finance and accounting
+3)Human resources
+4)Order processing
+5)Supply chain management
+d)Authentication Systems
+
+Example Use Case:-
+
+Let’s say a company has a legacy ERP system in their on-premises data center. Now they build a modern web-based dashboard using React and Node.js and host it on AWS.
+
+This dashboard pulls real-time data from the on-prem ERP system using secure connections (like VPN or Direct Connect). This is a hybrid cloud use case, because:
+
+1)The application is deployed in the cloud,
+2)But it is connected to on-premises infrastructure for data.
+
+
+Q."Running code without needing to manage or provision servers"
+
+What does the above statement mean?
+
+-The above statement refers to a cloud computing model called serverless computing.
+-Traditionally when you want to run a code , you have to :-
+1)Setup A Server (Physical Or Virtual Unit).
+2)Install Software (OS,runtime etc).
+3)Manage Updates,Security And Scaling
+4)Keep it running 24/7.
+
+-But in serverless computing, you don’t have to worry about any of that. You just:
+-Write your code and upload it — the cloud provider runs it for you automatically only when needed.
+
+Who manages the servers then?
+-The Cloud Provider(like AWS,GCP or Azure) takes care of :
+1)Server Provisioning(starting it up)
+2)Infrastructure Management
+3)Scaling(Handling more users automatically)
+4)Maintainance and security
+
+-You never interact directly with a server.
+-AWS Lambda is an AWS service that lets you run code without needing to manage or provision servers.
+The AWS Cloud offers three cloud deployment models: cloud, hybrid, and on-premises. 
+
+Question 3 :-
+
+"The aggregated cloud usage from a large number of customers results in lower pay-as-you-go prices."
+
+Q.What does the above statement mean?
+
+Aggregated Cloud Usage :-
+
+-When millions of people and businesses use cloud services ,all their usage adds up (aggregates) into a huge demand for computing , storage and other resources.
+-Because of this massive scale cloud providers like (aws,auzre or gcp) can reduce prices for everyone - especially in pay-as-you-go plans where you pay for what you use.
+
+Additional Points To Q3.-
+-Not having to invest in technology resources before using them relates to Trade upfront expense for variable expense.
+-Accessing services on-demand to prevent excess or limited capacity relates to Stop guessing capacity.
+-Quickly deploying applications to customers and providing them with low latency relates to Go global in minutes.
+
+
+Module 2 :- Compute In The Cloud
+
+The EC2(Elastic Cloud Compute) Instance:-
+
+-Businesses require servers to power their business and applications.
+-Businesses require raw compute power to host applications and other business needs.
+-The needs for compute power maybe a use case like youtube which streams video content to millions of users.
+-In AWS these servers are virtual,and these virtual servers are called as EC2.
+
+-If you go the hard way to get onprem servers, you have to research for which server you want to buy ,it would take weeks to get those servers and you are stuck with those servers when you get them either you use it or not.
+-With EC2 , this becomes easier.
+-When you need a EC2 instance , you request and get it.If you dont need it,you terminate it.
+-In AWS, you only pay for what you use.You only pay for a running EC2 instance and not a stopped or terminated instance.
+
+-EC2 runs on top of physical host machines managed by AWS using virtualization technology.
+-When you spin up a EC2 instance,you arent necessarily taking an entire host to yourself.
+-Instead , you are sharing the host with multiple other instances, otherwise known as virtual machines.
+-A hyperwisor running on the host machine is responsible for sharing the underlying physical resources between the EC2 instances.
+-This idea of sharing underlying hardware between multiple virtual machines is called as multitenancy.
+-The "hypervisor" is responsible for coordinating this multitenancy and it is managed by aws.
+-The hypervisor is reponsible to isolate the virtual machines from each other as they share resources from the host.
+-This means EC2 instances are secure.
+-Once EC2 instance is not aware of any other instances on the same host sharing the same underlying resources.
+
+-When you provision(start it up) an EC2 instance , you can choose the operating system based on either windows or linux.
+-You have this power to configure your own EC2 instance.
+-Beyond OS,you also configure what software you want running on your EC2 instance.
+-Whether it is a web app,databases , third party software , you have complete control iover what happens in that instance.
+-EC2 instances are also resizable, you may start with a small instance , if that instance is being maxed up , you can give more memory and CPU to that instance.
+-This process is called as vertically scaling an instance.
+
+-You also control the networking aspect of EC2.
+-What type of requests make it to your server and if they are publically or privately accessible is what you decide.
+
+-With EC2, AWS has made it very easy to acquire servers with this Compute-as-a-service model.
+
+Episode 2 :- Amazon EC2 Instance Types
+
+-From the example of coffee shop , the employees are the ec2 instances which server the client requests.
+-When the owner hires employees for the coffee shop , he doesnt only hire cashiers.
+-He hires waiters,chef's , baristas etc.
+-There are tons of roles and responsibilities which employees should have to make a business efficient.
+-Its important to look that the employee's skill set suits their role.
+-There are different types of ec2 instances that you can spin up and deploy into an aws environment.
+-Each Amazon EC2 instance type is grouped under an instance family and is optimized for certain types of tasks.
+-Instances with different types of CPU's , Memory , networking capabilities give you the resources you want suitable for your business.
+
+Below are the different Amazon EC2 instance families :-
+1)General Purpose:-
+-Provide a good balance of COmpute,Memory and networking resources.
+-Can be used for general purposes like web servers or copde repositories.
+2)Compute Optimized:-
+-Optimized for Compute Intensive tasks like gaming servers,High Performance Computing or scientific modelling.
+3)Memory optimized:-
+-Good for memory intensive tasks
+4)Accelerated Computing:-
+-Good for floating point number calculations,graphics processing or data pattern matching.
+5)Storage Optimized:-
+-A good for workloads which require high performance for locally stored data.
+
+Module 2 - Episode 2 - Test Your Knowledge :-
+
+Q1.Which Amazon EC2 Instance Is Suitable For Data Warehousing applications?
+
+-Storage Optimized.
+-This is because it is optimized for high local storage throughput.
+-Local storage refers to physical storage devices (usually NVMe SSDs) that are directly attached to the host machine running your EC2 instance.
+-And optimized for Disk I/O.
+
+Q2.Which Amazon EC2 instance is well suited for High Performance Databases?
+
+-Memory Optimized.
+-This is because memory optimized instances provides 100s of GB's or TB's of RAM.
+-This allows entire databases to be loaded on to the memory.
+-Faster read and write speen due to RAM than disk.
+-Better performance for in-memory databases like redis.
+
+
+Episode 3 :- Amazon EC2 Pricing
+
+-Amazon EC2 purchase options are as follows :-
+1)On-demand:-
+-Pay on hourly basis or seconds basis depends on what instance and OS you choose.
+-Best to test workloads and playaorund when getting started up.
+
+2)Savings Plan:-
+-This is like a commitment of consistent usage for 1 or 3 years paid on hourly basis.
+-Can save upto 72%.
+-Any usage up to the commitment is charged at the discounted Savings Plans rate (for example, $10 per hour). Any usage beyond the commitment is charged at regular On-Demand rates.
+-The savings with EC2 Instance Savings Plans are similar to the savings provided by Standard Reserved Instances.
+-Unlike Reserved Instances, however, you don't need to specify up front what EC2 instance type and size (for example, m5.xlarge), OS, and tenancy to get a discount. Further, you don't need to commit to a certain number of EC2 instances over a 1-year or 3-year term.
+
+3)Reserved Instances:-
+-Often used for steady state workloads.
+-This also involves 1 or 3 year term and can pay them using 3 payment options:-
+a)All upfront :-All in once payment
+b)Partial Upfronmt :-Some partial payment at first
+c)No Upfront :-No payment at first.
+
+Reserved Instances require you to state the following qualifications:
+
+i)Instance Type and Size :- for eg. m5.xlarge
+ii)Platform Description(OS) :- For eg. Microsoft Windows Server , or  red hat linux enterprise.
+iii)Tenancy :-Default or dedicated Tenancy.
+iv)Region :-An instance from which region for eg. Asia(mumbai)
+-Types of Reserved Instances :-
+i)Standard Reserved Instances:-
+-This option is a good fit if you know the EC2 instance type and size you need for your steady-state applications and in which AWS Region you plan to run them.
+ii)Convertible Reserved Instances:-
+-If you need to run your EC2 instances in different Availability Zones or different instance types, then Convertible Reserved Instances might be right for you.
+
+-At the end of a Reserved Instance term, you can continue using the Amazon EC2 instance without interruption. However, you are charged On-Demand rates until you do one of the following:
+i)Terminate the instance.
+ii)Purchase a new Reserved Instance that matches the instance attributes (instance family and size, Region, platform, and tenancy).
+
+4)Spot Instances :-
+-This allows you to request the spare Amaon EC2 computing capacity for upto 90% off 
+the on demand price.
+-The catch here is aws can reclaim the instance anytime they need it giving you a 2 minute warning to save up work and save state.
+-This is beneficial when your work allows you to be interrupted.
+-A good usecase is batch workloads.
+-Note:-Spot instances can only be launched if spare capacity is available,other wise it will delay your job.
+5)Dedicated Hosts:-
+-Which are physical hosts dedicated for your use for EC2.
+-Nobody else will share a tenancy of that host.
+
+Episode 4 :- Scaling Amazon EC2
+
+-Another major benefit of AWS is Scalability and Elasticity.
+-In on-prem data centers , there are hardwares required.
+-The overall consumption of your hardwares can be 10% at non peak hours or 80% at peak hours.
+-How do you decide how much resources to buy?
+-If you buy resources for average usage lets say which can handle upto 50% customers then they will struggle when there are 80% customers hike which is the key factor for your result.
+-If you buy resources for maximum capacity , your customers might be happy but most of the times the overall consumtion of resources might be only 10% and other all will be idle.
+
+How does AWS solves this problem?
+-Scalability involves beginning with only the resources you need and designing your architecture to automatically respond to changing demand by scaling out or in. As a result, you pay for only the resources you use. You don’t have to worry about a lack of computing capacity to meet your customers’ needs.
+-The AWS service that provides this functionality for Amazon EC2 instances is Amazon EC2 Auto Scaling.
+-AWS EC2 Auto Scaling enables you to automatically add or remove Ec2 instances in response to changing application demand.
+-Within Amazon EC2 Auto Scaling, you can use two approaches: dynamic scaling and predictive scaling:-
+1)Dynamic scaling responds to changing demand. 
+2)Predictive scaling automatically schedules the right number of Amazon EC2 instances based on predicted demand.
+
+-Suppose that you are preparing for launch of your application on  EC2 instances.
+-When configuring the size of auto-scaling group,you might set the minimum number of EC2 instances at first.
+-This means there will be atleast the minimum number of EC2 instances running at all times.
+
+Customizing The AutoScaling Group:-
+https://replit.com/@rajdubal87/AWS-Notes#AutoScaling.png
+
+1)Minimum Capacity:-
+-Minimum capacity is the minimum number of instances that will immediately launched after you have created a auto-scaling group.
+
+2)Desired Capacity:-
+-Next, you can set the desired capacity at two Amazon EC2 instances even though your application needs a minimum of a single Amazon EC2 instance to run.
+-Note:-If you do not setup desired capacity,then the desired capacity defaults to your minimum capacity.
+
+3)Maximum Capacity:-
+-The third configuration that you can set in an Auto Scaling group is the maximum capacity. For example, you might configure the Auto Scaling group to scale out in response to increased demand, but only to a maximum of four Amazon EC2 instances.
+-Because Amazon EC2 Auto Scaling uses Amazon EC2 instances, you pay for only the instances you use, when you use them. You now have a cost-effective architecture that provides the best customer experience while reducing expenses.
+
+
+Episode 5 :- Directing Traffic With Elastic Load Balancing
+
+-When you have multiple EC2 instances,all server the  same program , does the same job ,
+-And if a request comes,how does that request know which EC2 instance to go to?
+-How do we ensure there is even distribution of work loads accross multiple EC2 instances.
+-You need a way to route requests to instances , to process those requests.
+-The solution to this problem is load balancing.
+-A load balancer takes in requests and routes them to servers in order to get them processed.
+
+
+Elastic Load Balancing(ELB) :-
+
+-It is engineerd to address the undifferentiated heavy lifting of load balancing.
+-Elastic Load Balancing is a regional construct.
+-This service available on your region than on a entire instance.
+-ELB is automatically scalable.
+-As your traffic grows , it is designed to handle the throughput with no change in the hourly cost.
+-When the minimum or desired capacities are maxed out ,the auto scaled out instances make the ELB know that they are ready to handle requests.
+-Once the fleet scales in, ELB first stops all new traffic and waits for the current processing requests to get processed completely.
+-Once they do that , the autoscaling engine can terminate the instances without disruption to existing customers.
+-ELB is not only used for external traffic(Internet-facing traffic like users visiting your website).
+-Because ELB is regional ,its a single URL that each frontend instance uses.
+-All frontend instances (even across AZs) can use this one URL to reach the backend.
+-Then the ELB sends the traffic to the backend that has least outstanding requests.
+-When the backend scales , the new instance tells the ELB that it is ready to handle requests and ELB handles it.
+-The frontend doesnt have to care how many backend instances are there.
+-This is true decoupled architechture.
+
+More About Load Balancer :-
+
+-A lead balancer acts as single point of contact for all incoming traffic to your auto scaling group.
+-This means that as you add or remove EC2 instances in response to change in demand, this requests route to the lead balancer first.
+-Then, the requests spread across multiple resources that will handle them. For example, if you have multiple Amazon EC2 instances, Elastic Load Balancing distributes the workload across the multiple instances so that no single instance has to carry the bulk of it. 
+
+
+Episode 6 - Messaging and queuing
+
+-In the example of a coffee shop , the cashier and barista are in sync as the cashier gets the order and passes it to barista to prepare it.
+-What if the barista is out on a break , the entire process could be delayed or postponed.
+-To solve this , the coffee shop can introduce a order board or a buffer.
+-This type of idea of using a buffer is known as messaging and queuing.
+-Just like cashier sends messages to the barista, applications send messages to communicate.
+-If applications communicate directly with each other , just like cashier and barista, then this is called tightly coupled architecture.
+-But, in this architecture, if a single component fails , it can create mess for other components working.
+-If Application A communicates with Application B regularly, and if the Application B fails , then it can create errors for application as well.
+-A more reliable architecture is loosely coupled , single failure cannot cause cascading failures.
+-In this architecture , if one component fails, it is isolated and wont cause problems for other components.
+-In this , we introduce a buffer/message queue in between.
+-App A sends a message to the message queue , message queue sends this message to APp B.
+-If for some reason App B is failed , the messages from App A remains in the message queue until the App B is up and running to take requests.
+
+This service is implemented by amazon having name as :-
+-Amazon Simple Queue Service (SQS)
+-Amazon Simple Notification Service (SNS)
+
+Amazon Simple Queue Server(SQS) :-
+
+-Amazon SQS can Send,Store,Receive messaged between software components at any volumne.
+-THis is without loosing messages or without needing support of any other services.
+-The data contained within a message is called a payload and is protected until delivery.
+-SQS queues is the place where messaged are stored before they are processed.
+-AWS manages the underlying infrastucture to host those queues.
+-These scale automatically,are reliable and easy to configure and use.
+
+
+Amazon Simple Notification Service(SNS):-
+
+-Amazon SNS is similar , it is used to send out messages to services,but it can also send out notifications to end users.
+-It does it in a different way, in  a publish-subscribe or Pub-Sub model.
+-This means you can create something called as SNS topic which is just a channel for messages to be delivered.
+-You tyhen configure subscribers to that topic and finally publish those messages for those subscribers.
+-With just one go you can send a message in the channel and it will go to all its subscribers.
+-These subscribers can also be end points.Such as SQS queues , AWS lambda functions or HTTP/HTTPS web hooks.
+-SNS can also be used to push messages to end users using mobile push,sms and email.
+-In Amazon SNS, subscribers can be web servers, email addresses, AWS Lambda functions, or several other options. 
+
+Monolithic Approach :-
+https://replit.com/@rajdubal87/AWS-Notes#Monolithic.png
+
+-Applications are made of multiple components. The components communicate with each other to transmit data, fulfill requests, and keep the application running. 
+
+-Suppose that you have an application with tightly coupled components. These components might include databases, servers, the user interface, business logic, and so on. This type of architecture can be considered a monolithic application. 
+
+-In this approach to application architecture, if a single component fails, other components fail, and possibly the entire application fails.
+
+-Here every componenet is packaged together and is typically deployed on the same server.
+
+***To help maintain application availability when a single component fails, you can design your application through a microservices approach.
+
+Microservices approach :-
+
+https://replit.com/@rajdubal87/AWS-Notes#Microservices.png
+
+-In a microservices approach, application components are loosely coupled. In this case, if a single component fails, the other components continue to work because they are communicating with each other. The loose coupling prevents the entire application from failing. 
+
+-When designing applications on AWS, you can take a microservices approach with services and components that fulfill different functions. Two services facilitate application integration: Amazon Simple Notification Service (Amazon SNS) and Amazon Simple Queue Service (Amazon SQS).
+
+
+Publishing updates from Single Topic(using SNS):-
+https://replit.com/@rajdubal87/AWS-Notes#SNS%20Single%20Topic.png
+
+-A coffee shop can have a single newsletter which includes topics such as coffee trivia,coupons,new products.
+-All customers who subscribe to the newsletter receive updates about coupons, coffee trivia, and new products.
+
+Publishing updates from multiple topics(using SNS):-
+
+-Suppose now the clients wants a dedicated service for coupons,trivia and new products.
+-Now, instead of having a single newsletter for all topics, the coffee shop has broken it up into three separate newsletters. Each newsletter is devoted to a specific topic: coupons, coffee trivia, and new products.
+-Subscribers will now receive updates immediately for only the specific topics to which they have subscribed.
+-It is possible for subscribers to susbcribe to a single topic or multiple topics.
+
+
+More About Amazon Simple Queue Service(SQS):-
+
+-Using AWS SQS you can send,store and receive messages between software components, without loosing messages or requiring other services to be available.
+-In Amazon SQS, an application sends messages into a queue.
+-A user or service retrieves a message from the queue, processes it, and then deletes it from the queue.
+
+
+**Is a Decoupled Architecture,Loosely Coupled Architecture and Microservices the same?
+
+-Decoupled application components means a loosely coupled architecture, and microservices are one form of that architecture.
+-SO:-
+1)All microservices are decoupled,
+2)But not all decoupled architectures are microservices.
+
+Example:
+In a monolithic app, your email module can be decoupled from the order module using events or interfaces — even though it's all one codebase.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
