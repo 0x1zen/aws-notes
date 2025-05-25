@@ -238,6 +238,13 @@ Reserved Instances require you to state the following qualifications:
 i)Instance Type and Size :- for eg. m5.xlarge
 ii)Platform Description(OS) :- For eg. Microsoft Windows Server , or  red hat linux enterprise.
 iii)Tenancy :-Default or dedicated Tenancy.
+-Types of Tenancy :-
+1)Default Tenancy :-Your instance runs on shared hardware.Aws hosts your instances on physical servers that are shared with other customers.
+2)Reserved Tenancy :-Instance runs on hardware dedicated to your account.But you dont manage the hardware.
+-AWS places the instances on dedicated servers,you dont have access to set where they go.
+3)Dedicated Host Tenancy :-Gives you full visibility and control over a physical server.
+-You can see and control instance placement on that host.
+
 iv)Region :-An instance from which region for eg. Asia(mumbai)
 -Types of Reserved Instances :-
 i)Standard Reserved Instances:-
@@ -326,7 +333,7 @@ Elastic Load Balancing(ELB) :-
 
 More About Load Balancer :-
 
--A lead balancer acts as single point of contact for all incoming traffic to your auto scaling group.
+-A load balancer acts as single point of contact for all incoming traffic to your auto scaling group.
 -This means that as you add or remove EC2 instances in response to change in demand, this requests route to the lead balancer first.
 -Then, the requests spread across multiple resources that will handle them. For example, if you have multiple Amazon EC2 instances, Elastic Load Balancing distributes the workload across the multiple instances so that no single instance has to carry the bulk of it. 
 
@@ -366,9 +373,18 @@ Amazon Simple Notification Service(SNS):-
 -Amazon SNS is similar , it is used to send out messages to services,but it can also send out notifications to end users.
 -It does it in a different way, in  a publish-subscribe or Pub-Sub model.
 -This means you can create something called as SNS topic which is just a channel for messages to be delivered.
--You tyhen configure subscribers to that topic and finally publish those messages for those subscribers.
+-You then configure subscribers to that topic and finally publish those messages for those subscribers.
 -With just one go you can send a message in the channel and it will go to all its subscribers.
 -These subscribers can also be end points.Such as SQS queues , AWS lambda functions or HTTP/HTTPS web hooks.
+Imagine an e-commerce app:
+
+-Order Placed ➜ Message published to SNS.
+-Subscribers:
+1)Lambda for billing
+2)SQS queue for shipping service
+3)SQS queue for analytics service
+
+Each component receives the same order event, but processes it independently.
 -SNS can also be used to push messages to end users using mobile push,sms and email.
 -In Amazon SNS, subscribers can be web servers, email addresses, AWS Lambda functions, or several other options. 
 
@@ -424,6 +440,515 @@ More About Amazon Simple Queue Service(SQS):-
 
 Example:
 In a monolithic app, your email module can be decoupled from the order module using events or interfaces — even though it's all one codebase.
+
+Episode 7 :- Additional Compute Services
+
+-EC2 requires you to setup and manage your fleet of instances over time.
+-When you are using EC2 you are responsible for patching your instances when new packages come out.
+-Setting up the scaling of those instances as well as ensuring that you've architected your solutions to be hosted in highly available manner.
+-THis is just not as much management if you hsoted these on premises.
+
+What are some computing services that aws offer that are more convineint from management perspective?
+
+-This is where the term serverless comes in.
+-Serverless means you cannot actually see or manage the underlying infrastructure or instances that are hosting your application.
+-Instead,all the management of the underlying environment from a provisioning , scaling , high availabilty and management perspective are taken care for you.
+-All you have to do is focus on your application and everything else is taken care of.
+
+AWS Lambda :-
+
+-AWS lambda is one aws serverless compute option
+-Lambda allows you to upload your code into a lambda function
+-COnfigure a trigger , and from there the service waits for the trigger , when the trigger is tiggered the code is run in a managed environment.
+-It is automatically scalable , highly available and the maintainance of it is done by aws itself.
+-If you have 1 or 1000 triggers,lambda will scale your function to meet demand.
+-Lambda is designed to run code under 15 minutes.
+-THis isnt long running processes like deep learning , its more suited for quick processing like a web backend , handling requests etc.
+
+-If we are not ready for serverless yet but still want efficiency and protability , you should look at aws container services like Amazon elastic container service(ECS) or amazon elastic kubernetes service(EKS).
+-both of these services are container orchestration tools.
+-A container in this case is a docker container.
+-Docker is a widely used platform , that uses operating system level virtualization to deliver software in containers.
+-A container is a package for your code.
+-Its where you pakcge your application , its dependencies as well as configurations that you need to run.
+-These containers run on top of EC2 instances and run in isolation from each other similar to how virtual machines work.
+-But in this case the host is an EC2 instance.
+-When you use docker containers on aws , you need processes to stop ,start , restart and monitor containers running accross not just one EC2 instance but a number of them together which is called a cluster.
+-The process of doing these tasks is called container orchestration.
+-Orchestration tools are created to help you manage your conatiners.
+-ECS(elastic container service) is designed to help you run your containerized applications at scale without the hassle of managing your own container orchestration tool.
+-EKS does a similar thing but uses different tooling and with different features.
+-Both Elastic container service and Elastic kubernetes service can run on top of EC2.
+-But if you dont want to think about EC2s to host your containers because you dont need access to underlying OS or you dont want to manage those EC2 instances , you can use a aws platform called AWS Fargate.
+-Fargate is a serverless compute platform for ECS or EKS.
+
+
+The difference between Traditional , serverless and containerzied severless :-
+
+Traditional :-
+-If you are trying to host your traditional operations and want full access to underlying operating system , you are going to want a EC2.
+
+Serverless:-
+-If you are looking to host short running functions , service oriented or event driven applications
+-and you dont want to manage the underlying environment at all , you shoould look into serverless compute model called aws lambda.
+
+Containerized Serverless :-
+-If you are looking to run docker container based workloads on aws , you first need to choose your orchestration tool.
+-Do you want to use amazon ecs or eks.
+-Then you need to select your platform.
+-Do you want to host your containers on EC2 that you manage or in a serverless environment called AWS fargate.
+
+More about serverless computing :-
+
+https://replit.com/@rajdubal87/AWS-Notes#ServerlessComputing.png
+
+AWS Lambda Pricing :-
+
+While using AWS Lambda, you pay only for the compute time that you consume. Charges apply only when your code is running. You can also run code for virtually any type of application or backend service, all with zero administration. 
+
+For example, a simple Lambda function might involve automatically resizing uploaded images to the AWS Cloud. In this case, the function triggers when uploading a new image. 
+
+Explaination to above example :-
+In AWS Lambda, "set your code to trigger from an event source" means that you configure Lambda to automatically run your function in response to specific events from other AWS services or external systems.
+
+An event source is the place or service where an action (event) happens, and when that event occurs, it triggers your Lambda function.
+
+
+More About Containers :-
+
+-Containers provide you with a standard way to package your application's code and dependencies into a single object. 
+-You can also use containers for processes and workflows in which there are essential requirements for security, reliability, and scalability.
+
+
+One host with multiple containers :-
+https://replit.com/@rajdubal87/AWS-Notes#1hostwithmultiplecontainers.png
+
+-Suppose that a company’s application developer has an environment on their computer that is different from the environment on the computers used by the IT operations staff. The developer wants to ensure that the application’s environment remains consistent regardless of deployment, so they use a containerized approach. This helps to reduce time spent debugging applications and diagnosing differences in computing environments.
+
+The Host Can Be:-
+1)An EC2 instance (virtual server in AWS)
+2)A dedicated host (a physical server allocated entirely to you)
+3)Your own on-premise machine or VM
+
+Ten hosts with hundreds of containers :-
+https://replit.com/@rajdubal87/AWS-Notes#10Hosts100Containers.png
+
+When running containerized applications, it’s important to consider scalability. Suppose that instead of a single host with multiple containers, you have to manage tens of hosts with hundreds of containers. Alternatively, you have to manage possibly hundreds of hosts with thousands of containers. At a large scale, imagine how much time it might take for you to monitor memory usage, security, logging, and so on.
+
+
+Amazon Elastic Container Service (Amazon ECS) :-
+
+Amazon Elastic Container Service (Amazon ECS)(opens in a new tab) is a highly scalable, high-performance container management system that enables you to run and scale containerized applications on AWS. 
+
+Amazon ECS supports Docker containers. Docker(opens in a new tab) is a software platform that enables you to build, test, and deploy applications quickly. AWS supports the use of open-source Docker Community Edition and subscription-based Docker Enterprise Edition. With Amazon ECS, you can use API calls to launch and stop Docker-enabled applications.
+
+Amazon Elastic Kubernetes Service (Amazon EKS):-
+
+Amazon Elastic Kubernetes Service (Amazon EKS)(opens in a new tab) is a fully managed service that you can use to run Kubernetes on AWS. 
+
+Kubernetes(opens in a new tab) is open-source software that enables you to deploy and manage containerized applications at scale. A large community of volunteers maintains Kubernetes, and AWS actively works together with the Kubernetes community. As new features and functionalities release for Kubernetes applications, you can easily apply these updates to your applications managed by Amazon EKS.
+
+AWS Fargate
+
+AWS Fargate(opens in a new tab) is a serverless compute engine for containers. It works with both Amazon ECS and Amazon EKS. 
+
+When using AWS Fargate, you do not need to provision or manage servers. AWS Fargate manages your server infrastructure for you. You can focus more on innovating and developing your applications, and you pay only for the resources that are required to run your containers.
+
+What Does Scaling your instance vertically or horizontally mean?
+
+Scaling Vertically :-
+
+-Resizing your instance with more cpu,memory , storage etc.
+
+Scaling Horizontally :-
+
+-Adding more instances of same size.
+
+Module 2 Quiz :-
+
+Q1.You want to use an Amazon EC2 instance for a batch processing workload. What would be the best Amazon EC2 instance type to use?
+
+Answer :-
+
+Compute Optimized.
+
+Why?
+
+For batch processing, the best EC2 instance type is usually from the Compute Optimized family (like C7g, C6a, C5, etc.) because batch jobs are typically CPU-intensive and time-sensitive, and compute optimized instances give you maximum processing power per dollar.
+
+Batch jobs usually crunch a lot of data and run heavy computations
+
+Why not other options?
+
+-General purpose instances provide a balance of compute, memory, and networking resources. This instance family would not be the best choice for the application in this scenario. Compute optimized instances are more well suited for batch processing workloads than general purpose instances.
+
+-Memory optimized instances are more ideal for workloads that process large datasets in memory, such as high-performance databases.
+
+-Storage optimized instances are designed for workloads that require high, sequential read and write access to large datasets on local storage. The question does not specify the size of data that will be processed. Batch processing involves processing data in groups. A compute optimized instance is ideal for this type of workload, which would benefit from a high-performance processor.
+
+Q.Which process is an example of Elastic Load Balancing?
+
+-Ensuring that no single Amazon EC2 instance has to carry the full workload on its own.
+
+-Elastic Load Balancing is the AWS service that automatically distributes incoming application traffic across multiple resources, such as Amazon EC2 instances. This helps to ensure that no single resource becomes overutilized.
+
+
+Q.You want to deploy and manage containerized applications. Which service should you use?
+
+-Amazon EKS is a fully managed Kubernetes service. Kubernetes is open-source software that enables you to deploy and manage containerized applications at scale.
+-Similarly , Amazon ECS works.
+-For fully non-managed containerized service is Amazon Fargate.
+
+
+Module 3 : Global Infrastructure and Reliability
+
+Episode 1:
+
+-From out coffee shop example lets say there is a monday and we do have lot of customers coming to ouyr coffee shop to get a coffee.
+-Now,lets say there is a parade going on the same road as the coffee shop.
+-This will make our customers diverted from the coffee shop from getting a coffee,
+-What can be a solution?
+-This is not the only coffee shop at that location.
+-The cafe is actually a chain and we have locations all around the city.
+-This way even if there is a parade or power outage , customers can go to other shops and get their coffee.
+-This way we make our money and customers get their coffee.
+
+-This is the similar way in which the aws global infrastructure is setup.
+
+The AWS global infrastructure :-
+
+-It is not good that there is this single location where all the data center resources are.
+-If something would happen to that data center , like a power outage or natural disaster,everyuones apps would go down all at once.
+-You will need high availability and fault tolerence.
+-Turns out it is also not good enough to have 2 data centers.
+-AWS operates in all sorts of different areas , around the world called regions.
+
+
+Episode 2 : AWS regions
+
+-The main problem with data centers is any calamities , disasters can happen and no matter who owns the data centers rather be a onprem or aws , it will create problems.
+-Most of the businessesd stop because of it.
+-Businesses cannot run on the hope that disaster wont happen.
+
+Solution By AWS:-
+
+-AWS builds regions to be closest to where the business traffic demands.
+-Locations like , dublin , ohio , mumbai etc
+-Inside each region , we have multiple data centers that have all the compute, storage and other services you need to run your applications .
+-Each region can be connected to other region with a  high speed fibre optic network controlled by aws.
+-Each region is isolated from every other region in the sence that no data goes in and out of your environment from that region without you explicitly granting permissions to move that data out.
+-This is a critical security conversation to have.
+
+For eg.
+
+-You might have government compliance requirements that your financial information in frankfurt cannot leave germany.
+-This is how aws works , no data from one region moves to another without explicit permissions with right credentials is granted.
+-Regional data sovereignty(the power that a country has to control its own government) is part of the critical design of aws regions.
+
+You as a business owner how do you make a decision in which region you pick?
+
+There's four business factors that go into choosing a region :-
+
+1)Compliance :-
+-You must first look at your compliance requirements.
+-you have a requirement that your data must live in indian boundaries.
+-Then you should choose the mumbai region.
+-No other thing should come before compliance.
+2)Proximity:-
+-How close you are to your customer base is a major factor because speed of light , still the law of the universe.
+-You having cutsomer base of india and setting up a server at us region can create latency problems.
+-Laterncy is the time it takes for data to be sent and received.
+-Locating close to your customer base is usually the right call.
+3)Feature availability:-
+-Sometimes the closest region may not have all the aws features you want.
+-For eg. Your developers want to play with Amazon Bracket(AWS's new quantom computing platform) , well then they have to run in the platform that already have the hardware installed.
+4)Pricing:-
+-Even though the hardware is the same , some locations are more expensive than other locations to operate in.
+-For eg.Brazil's tax structure is more expensive for aws to operate than compared to many other countries.
+-If price is your primary concern , even if your customer base is in brazil region , you might wanna set your region as oregon,usa .
+
+
+Episode 3 : Availability zones 
+
+-AWS calls a single data center or a group of data centers an availability zone.
+-EAch availability zone is one or more discrete data centers with redundant power,networking and connectivity.
+-When you launch an EC2 instance, it launches an virtual server on a physical hawdware that is installed in an  availability zone.
+-This means each aws region consist of multiple isolated physically separate availability zones within a geographic region.
+-a region like Mumbai contains multiple AZs, which are like multiple AWS-managed, isolated data centers within that city or surrounding area. This setup enables resilient and scalable cloud architecture.
+-AWS keeps each availability zone 10s of miles accross so that in the case of huge scale natural disaster , your application is still running.
+-AWS advices that to run accross two availabiltiy zones in a region.
+-This means redundantly deplopying your application over aws az's to keep your app ruinning everytime.
+-Redundant means having duplicate systems/components in place so that if one fails, the other can take over without service interruption.
+For eg. Elastic Load Balancing is a regional construct which runs on a region and not on a single EC2 or on a single AZ.
+-It runs accross all availability zones communicating with the EC2 instances..
+-When you want high availability , any services that is regionally scoped service is always highly available.
+
+More about availabilty zones:-
+
+https://replit.com/@rajdubal87/AWS-Notes#AWSAvailabilityZones.png
+
+-An Availability Zone is a single data center or a group of data centers within a Region. Availability Zones are located tens of miles apart from each other. This is close enough to have low latency (the time between when content requested and received) between Availability Zones. However, if a disaster occurs in one part of the Region, they are distant enough to reduce the chance that multiple Availability Zones are affected.
+
+How is using multiple availability zones in a region useful :-
+
+https://replit.com/@rajdubal87/AWS-Notes#SingleAZ.png
+
+https://replit.com/@rajdubal87/AWS-Notes#MultipleAZ's.png
+
+https://replit.com/@rajdubal87/AWS-Notes#AZFailure.png
+
+
+Q."A data center that an AWS service uses to perform service-specific operations" ?
+
+-An Edge Location
+-An edge location is a data center that an AWS service uses to perform service-specific operations. 
+
+Q."A service that you can use to run AWS infrastructure within your own on-premises data center in a hybrid approach" ?
+
+-AWS Outposts is a service that you can use to run AWS infrastructure, services, and tools in your own on-premises data center in a hybrid approach.
+
+Q."A geographical area that contains AWS resources" ?
+
+-A Region is a geographical area that contains AWS resources.
+
+
+Episode 4 : Edge Locations 
+
+-One of the major criteria in selecting a aws region was proximity to your customers.
+-But what if you have customers all over the world or in cities which are not closer to one of aws regions?
+For eg.If you have customers in mumbai , who have access to your data , but your data is hosted out of tokyo region.
+-Rather than having mumbai based customers send requests to tokyo to access that data , just place a copy locally or cache a copy in mumbai.
+-Caching the data closer to the customers all around the world uses the concept of content delivery networks or CDN's.
+-In AWS , CDN's are called as Amazon CloudFront.
+
+Amazon CloudFront:-
+
+-It is a service that helps deliver data,video,applications and API's with customers around the world with low latency and high transfer speeds.
+-Amazon Cloudfronts uses what are called edge locations all around the world to help accelerate communication with users , no matter where they are.
+-Edge locations are separate from regions.
+-So you can push content from inside a region to a collection of edge locations around a world in order to accelerate communication and content delivery.
+-AWS Edge Locations , also run more than just cloudfront , they run a domain name service or DNS known as Amazon Route 53 , helping direct customers to the right web locations with reliably low latency.
+-But what if your business wants to use wants to use aws services inside of their own building?
+
+Introducing AWS Outposts:-
+
+-Here , AWS will install fully operational mini region, right inside your data center.
+-That's owned and operated by aws.
+-It uses 100% of aws functionality , but isolated within your own building.
+
+
+Summary :-
+
+1)Regions are geographically isolaed areas where you can access services needed to run your enterprice.
+2)Regions contain availability zones that allows you to run accross physically serparated buildings while keeping your application logically unified.
+3)AWS Edge Locatons run Amazon Cloudfront to help get content closer to your customers.
+
+More About Edge Locations :-
+
+https://replit.com/@rajdubal87/AWS-Notes#EdgeLocations.png
+
+https://replit.com/@rajdubal87/AWS-Notes#EdgeLocationsA.png
+
+https://replit.com/@rajdubal87/AWS-Notes#EdgeLocationsB.png
+
+https://replit.com/@rajdubal87/AWS-Notes#EdgeLocationsC.png
+
+
+Episode 5 : How to provision AWS resources
+
+-How do you actually interact with these services?
+-The answer is API's
+-In AWS , everything is an API call.
+-An API is a application programming interface and what this means is there are pre-determined ways for you to interact with AWS services.
+
+Q.Why is a API called "Application Programming Interface"?
+
+1)Application :- Application here means a software you are building or integrating with.
+2)Programming :- You are writing code to interact with it.
+3)Interface :- A set of exposed commands , inputs , outputs you can use - like a control pannel.
+
+An interface (set of commands) for programmers to interact with an application or service.
+
+Continuing with how to interact with aws services :-
+
+-You can invoke these API's to provision , configure or manage your AWS resources.
+For eg.You can launch a EC2 instance or you can create a AWS lambda function.
+-Each of those will be different requests and different api calls to aws.
+-You can use the aws management console , the aws command line interface(CLI) , the aws software development kits or various other tools like aws CloudFormation to create requests to send to AWS API's to create and manage aws resources.
+
+
+1)AWS Management Console :-
+
+-Through AWS console,you can manage your resources visually.
+-It is a good starting point.
+-This is good for building out test environments or viewing aws bills , vewing monitoring and working wit other non technical resources.
+-However when your application is up and running in a production environment you dont want to rely on the point and click style that the console that your console gives you to create and manage your aws resources.
+For Example : In order to create an amazon EC2 instance, you need to click through various screens , setting all the configurations you want and then you launch your instance.
+-If later you wanted to launch another EC2 instance, you will need to go back into the console and click into the screens again to launch another EC2 instance.
+-By having humans do  this sort of manual provisioning , you are opening yourself to potential errors.
+-It is easy to forget to check a checkbox or mis-spell something while doing the entire thing manually.
+
+2)AWS CLI :-
+
+The answer to this problem is to use tools that allow you to script or program the API calls.
+-One tool you can use is the AWS CLI.
+-The CLI allows you to make API calls using the terminal on your machine.
+-It makes the complete scene prone to errors if you have pre-written scripts to setup a instance.
+-You can have this scripts run automatically like on a schedule or triggered by another process.
+-Automation is  very important to having a successfull and predictible cloud deployment over time.
+
+3)AWS SDK :-
+
+-Another way to interact with AWS services is AWS SDK.
+-The software development kits allows you to interact with aws resources through various programming languages.
+-This helps developers develop programs that use aws without using the low-level api's ,as well as avoiding the manual resource creation.
+-Here low level API's mean The raw HTTP requests you would have to send directly to AWS services, using their REST APIs, without any helper tools.
+-These APIs are the under-the-hood web interfaces that AWS exposes — and they’re powerful, but very complex and verbose.
+
+ What the AWS SDK Does Instead:
+
+The AWS SDK (Software Development Kit) gives you ready-made libraries in popular languages like:
+1)Python (boto3)
+2)JavaScript/Node.js (aws-sdk)
+3)Java, Go, C#, etc.
+
+You just write few lines of code:-
+
+import boto3
+
+s3 = boto3.client('s3')
+s3.create_bucket(Bucket='my-bucket')
+
+
+More About AWS Management Console :-
+
+The AWS Management Console is a web-based interface for accessing and managing AWS services. You can quickly access recently used services and search for other services by name, keyword, or acronym. The console includes wizards and automated workflows that can simplify the process of completing tasks.
+
+You can also use the AWS Console mobile application to perform tasks such as monitoring resources, viewing alarms, and accessing billing information. Multiple identities can stay logged into the AWS Console mobile app at the same time.
+
+More About AWS Command Line Interface (CLI) :-
+
+To save time when making API requests, you can use the AWS Command Line Interface (AWS CLI). AWS CLI enables you to control multiple AWS services directly from the command line within one tool. AWS CLI is available for users on Windows, macOS, and Linux. 
+
+By using AWS CLI, you can automate the actions that your services and applications perform through scripts. For example, you can use commands to launch an Amazon EC2 instance, connect an Amazon EC2 instance to a specific Auto Scaling group, and more.
+
+
+More About AWS Software Development Kits (SDK) :-
+
+Another option for accessing and managing AWS services is the software development kits (SDKs). SDKs make it easier for you to use AWS services through an API designed for your programming language or platform. SDKs enable you to use AWS services with your existing applications or create entirely new applications that will run on AWS.
+
+To help you get started with using SDKs, AWS provides documentation and sample code for each supported programming language. Supported programming languages include C++, Java, .NET, and more.
+
+
+Episode 6: How to provision AWS resources Part 2
+
+There are 3 ways to interact with AWS resources :-
+
+1)AWS management console
+2)AWS CLI
+3)AWS SDK
+
+-WHich are "do it your own way" interacting options.
+
+To provision a resource :-
+You will have to
+1)Login into your AWS management console.
+2)Write commands
+3)Write Programs
+
+There are also other ways you can manage your aws environment using manage tools like 
+
+1)AWS Elastic BeanStalk
+2)AWS CloudFormation
+
+AWS Elastic BeanStalk :-
+-It is a service that helps you provision Amazon EC2-based environments.
+-Instead of clicking around the console or writing multiple commands to build out your network , EC2 instances , scaling and elastic load balancers
+-You can instead provide your application code and desired configurations to the aws elastic beanstalk service.
+-Which takes that information and builds out your environment for you.
+-AWS elastic beanstalk also makes it easy to save environment configurations , so they can be deployed again easily.
+-AWS BeanStalk gives you the convinience of not having to provision and manage all of those pieces separately, while still giving you the visibility and control of the underlying resources.
+-You get to focus on your business application and not the infrastructure.
+
+AWS CloudFormation :-
+
+-Another service that lets you do automated and repeated deployments is AWS CloudFormation.
+-AWS Cloud Formation is a infrastructure as a code tool used to define a wide variety of AWS resources in a declarative way using json or YAML text-based documents called CloudFormation templates.
+-A declarative format like this allows you to define what you want to build , without specifying the details of exactly how to build it.
+-CloudFormation lets you define what you want and the cloud formation  engine will worry about the details on calling the API's to get everything built out.
+-It isnt just limited to EC2 based solutions.
+-CloudFormation doesn't only manage resources that you directly launch on EC2.
+-Some AWS Services don’t require EC2 instances at all:
+1)S3
+2)RDS(MySQL)
+3)Lambda
+4)Athena etc.
+-Cloudformation supports many different aws resources from storage , databases , analytics , machine learning and more.
+-Once you define your resources in a CloudFormation Template  , cloudformation will parse the template and begin provisioning all the resources you defined in parallel.
+-AWS Cloudformation manages all the calls to the backend aws api's for you.
+https://replit.com/@rajdubal87/AWS-Notes#AWSCloudFormation.png
+
+-You can run the same cloudformation template with multiple accounts or multiple regions and it will create identical environments accross them.
+-There is less room for human error as it is a totally automated process.
+
+
+More About Elastic BeanStalk :-
+
+With AWS Elastic Beanstalk, you provide code and configuration settings, and Elastic Beanstalk deploys the resources necessary to perform the following tasks:
+1)Adjust capacity :- Here capcity means raw compute power
+2)Load balancing
+3)Automatic scaling
+4)Application health monitoring
+
+
+More About AWS CloudFormation :-
+
+AWS CloudFormation provisions your resources in a safe, repeatable manner, enabling you to frequently build your infrastructure and applications without having to perform manual actions. It determines the right operations to perform when managing your stack and rolls back changes automatically if it detects errors.
+
+
+Q. "Ability to assign custom permissions to different users"?
+
+-Assigning custom permissions to different users is a feature that is possible in all AWS Regions.
+-It is a regional construct.
+
+Q."A service that enables you to run infrastructure in a hybrid cloud approach"?
+
+-AWS Outposts
+-AWS Outposts is a service that enables you to run infrastructure in a hybrid cloud approach.
+
+Q."A serverless compute engine for containers"?
+
+-AWS Fargate
+-AWS Fargate is a serverless compute engine for containers.
+
+Note :-
+
+Amazon ECS and Amazon EKS are services used to manage container orchestration at scale.
+-Orchestration here mean Automating the Management of Containers.
+
+ECS has following options :-
+
+Launch Type?	   Who Manages the Infrastructure?	 Use Case?
+ECS on EC2	     You do (manage EC2 instances)	   More control, but more setup
+ECS on Fargate	 AWS does (serverless)	           Less work, easy scaling
+
+
+Q."What is an Origin Server"?
+
+-An origin is the server from which CloudFront gets your files. 
+-Examples of CloudFront origins include Amazon Simple Storage Service (Amazon S3) buckets and web servers.
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
