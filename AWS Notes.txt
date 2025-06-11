@@ -939,6 +939,218 @@ Q."What is an Origin Server"?
 -Examples of CloudFront origins include Amazon Simple Storage Service (Amazon S3) buckets and web servers.
 
 
+Module 4 : Networking
+
+Episode 1:
+
+-From our coffee shop , what if there are eager customers who want to give their orders directly to the barista than going to a Cashier?
+-It is not good to allow all customers to directly interact with baristas since they are already busy in brewing some best coffee's.
+
+
+Amazon Virtual Private Cloud(VPC) :-
+
+-A VPC lets you provision(setting up) a logically isolated section of the aws cloud where you can launch aws resources in a virtual network that you define.
+-These resources can be public facing so they have access to the internet or private with no internet access usually for backend services like databases or application servers.
+-When AWS says "private resources have no internet access", it means:
+1)They cannot directly connect to or be reached from the public internet (no public IP, no internet gateway).
+2)But they can still function perfectly within your private network (VPC).
+3)They Serve Internal Traffic Only.
+
+-The public and private grouping of resources are known as subnets.
+-and they are ranges of IP addresses in your vpc.
+-A subnet (short for sub-network) is a smaller range of IP addresses carved out from your VPC's overall IP space.
+-If your VPC is a neighborhood, then subnets are the blocks (streets) inside it, and each IP is like a house address.
+ "Range of IP Addresses" Means:
+ -When you create a VPC , you get to define a CIDR block(Class-less inter domain routing block) , this defines the total range of IP addresses your virtual network can use.
+
+ Example:
+
+ VPC CIDR block: 10.0.0.0/16
+
+This gives you:
+
+IPs from 10.0.0.0 to 10.0.255.255
+
+That’s 65,536 IP addresses!
+
+You divide the VPC into subnets like:
+1)Public Subnet: 10.0.0.0/24 → 256 IPs (used for internet-facing resources like load balancers)
+2)Private Subnet: 10.0.1.0/24 → 256 IPs (used for backends, databases, etc.)
+
+Each subnet has its own range of IPs assigned from the VPC’s total pool.
+
+
+Now In Our Coffee Shop :-
+
+-We have different employee's and 1 is a cashier.
+-They take customer's orders and thus we want customers to interact with them, so we put them in what we call a public subnet.
+-Hence they can talk to the customers or the internet.
+-But for baristas , we want them to focus on making coffee and not interact with customers direclty.
+-So we put them in a private subnet.
+
+
+Episode 2 : Connectivity to AWS 
+
+-VPC or Virtual Private Cloud is your own private network in aws.
+-A networking service that you can use to establish boundaries around your aws resources is Amazon Virtual Private Cloud (VPC).
+-A VPC allows you to define your private IP range for your aws resources.
+-You place things like your EC2 instances , your ELB's inside of your VPC.
+-You place these resources into different subnets.
+-Subnets are chunks of IP addresses in your VPC that allow you to group resources together.
+-Subnets control whether resources are either publicly or privately available.
+-For some VPC's you might have internet facing resources that the public should be able to reach like a public website for example.
+-However in other scenarios you might have resources that you only want to be reachable if someone is logged into your private network.
+-This might be internal services like a backend database.
+
+-In order to allow public traffic flow into and out of your VPC , you must attach an Internet Gateway or IGW to your VPC.
+-An internet gateway is like a doorway that is open to public.
+-Think of it like a coffee shop , without a doorway , customers cant get in our coffee shop.
+-So we install a front door for people to get in and out of our coffee shop.
+-The front door here is like a gateway.
+-Without it , no one can get into your resources placed inside of your VPC.
+
+
+VPC With All Internal Private Resources :-
+
+-WE dont want anyone from anywhere to reach these resources.
+-So we dont want a internet gateway attached to our VPC.
+-Instead , we want a private gateway that will only allow traffic if it is coming form a approved network.
+-This private doorway is called a virtual private gateway.
+-And it allows you to create a VPN connection between a private network , like your on premises data center or your internal corporate network to your vpc.
+-Taking it back to the coffee shop , this would be like a private bus route going from my building to the coffee shop.
+-If I want to get coffee , i must first badge into the building thus authenticating my identity and then I can take the internal bus route to the internal coffee shop that only people from my building can use.
+-So if you want to establish a encrypted VPN connection to your private internal aws resources you will need to attach a virtual private gateway to your vpc.
+-Now the problem with our super secret bus route is that it still uses the open road.
+-It is succeptible to traffic jams,parades caused by the rest of the world.
+-THe same thing is true for VPN connections.
+-They are private and they are encrypted ,they share the same bandwidth that is shared by many people that use the internet.
+
+-To solve this problem , we need a magic doorway which leads directly to the coffee shop from home.
+-Like a door in our home to coffee shop.
+-The point here is you want a private connection , and you want it dedicated and it should not be shared with anyone else.
+-You want the lowest amount of latency possible with highest amount of security possible .
+-With aws you can achieve that with what is called AWS Direct Connect.
+
+
+AWS Direct Connect :-
+
+-Direct Connect allows you to establish a completely private , dedicated fiber connection from your data center to aws.
+-You work with a direct connect partner in your aread to establish this connection.
+-AWS direct connect provides a physical line that connects your network to your aws VPC.
+-Its also important to note that one vpc might have multiple types of gateways attached for multiple types of resources all residing in the same vpc just in different subnets.
+
+More About VPC :-
+
+-Amazon VPC enables you to provision an isolated section of the AWS Cloud. In this isolated section, you can launch resources in a virtual network that you define. Within a virtual private cloud (VPC), you can organize your resources into subnets. A subnet is a section of a VPC that can contain resources such as Amazon EC2 instances.
+
+VPC is a regional construct:
+A Virtual Private Cloud (VPC) spans an entire AWS region and provides the networking framework for your resources. It includes routing tables, internet gateways, NAT gateways, and other networking components.
+
+Subnets within a VPC:
+
+Subnets are Availability Zone (AZ)-specific, meaning each subnet resides in a single AZ.
+Subnets can be classified as public (accessible from the internet) or private (isolated from direct internet access).
+A VPC can have multiple subnets distributed across different AZs within the region.
+
+ELB works inside a VPC:
+
+An Elastic Load Balancer (ELB) operates within a VPC and distributes traffic to targets (e.g., EC2 instances, containers, or IP addresses).
+The ELB is a regional construct, meaning it spans multiple AZs and can route traffic to resources in subnets across those AZs.
+For example, if your VPC has subnets in three AZs, the ELB can distribute traffic to EC2 instances in all three subnets, ensuring high availability and fault tolerance.
+
+
+Episode 3 : Subnets and Network Access Control
+
+
+AWS Wide amount of networking tools that covers every layer of security:-
+
+1)Network Hardening
+2)Application Security
+3)User Identity
+4)Authentication and Authorization
+5)Distributed denial of service (DDOS) prevention.
+6)Data Integrity
+7)Encryption
+
+1)Network Hardening :-
+
+-The only technical reason to use subnets in a VPC is to control access to the gateways.
+-The public subnets have access to the internet gateway and the private subnets do not.
+-Subnets can also control traffic permissions.
+-Packets are messaged from the internet.
+-Every packet that crosses subnet boundaries gets checked against something called a network access control list or network ACL.
+-This check is to see if the packet has permissions to either leave or enter the subnet based on who it was sent from and how its trying to communicate .
+-You can think of Network ACLs as passport officers , if you're on the approved list ,  you get thorugh.
+-If you are not on the list or if you are explicitly on the do not enter list , then you getr blocked.
+-Network ACL check traffic incoming and outgoing from the subnet.
+-Just because you were let in , doesnt necessarily mean they are gonna let you out.
+-Approved traffic can be sent on its way and potentially harmful trafic like attempts to gain control of a system through administrative requests , they getr blocked before they ever touch the target.
+
+But is that enough?
+
+-A network ACL only gets to evaluate the packet which crosses a subnet boundary , in or out.
+-It doesnt evaluate if a packet can reach a specific EC2 instance or not.
+-Sometimes you will have multiple EC2 instances in the same subnet , but they might have different rules around who can send them messages , what port those messages are allowed to be sent to.
+-SO you need instacnce level security as well.
+
+To solve instance level access questions we introduce Security Groups :-
+
+-Every EC2 instance when it is launched automatically comes with a security group.
+-By default the security group does not allow any traffic into the EC2 instance at all.
+-All ports are blocked.
+-All IP addresses sending packets are blocked.
+-If you actually want an EC2 instance to accept traffic from lets say a frontend message or message from the inertnet.
+-So you can modify the security group to accept a specific type of traffic.
+-In the case of a website , you want webn based traffic or https request to be accepted but not other traffic lets say Operating system or administration requests.
+-In a ec2 instance , we can think of it a building and a doorman being the security group.
+-This doorman will allow specific allowed requests in , and by default all the requests can exit without being checked.
+
+The Key Difference between a Security Group And A Network Access Control List:-
+
+-The Security Group is stateful.Meaning it has some kind of memory in order to who to allow in or out.If you allow an incoming request, the response is automatically allowed out — no need to explicitly allow outgoing traffic for that connection.
+-On the other hand , the network ACL is stateless , which remembers nothing.Checks every packet that crosses its borders regardless of its circumstances.
+-Because NACLs are stateless, they treat inbound and outbound traffic as separate events. 
+
+
+More :-
+
+-This traffic management  , it doesnt care about the contents of the packet itself.In fact it doesnt even open the envelope.It cant.All it can see is if the sender is on the approved list.
+
+What are ephermal ports :-
+
+-When your device sends a request to  a server , it uses :-
+1)A fixed destination port(80 for http or 443 for https)
+2)And a random high numbered source port (ranging from 1024–65535)
+
+-This random port is called ephermal port.Its how your system keeps track of which request the incoming response belongs to.
+
+
+Sending Packets from a subnet to another:-
+https://replit.com/@rajdubal87/AWS-Notes#SendingPacketsBetweenSubnets.png
+
+-Consider a example of subnet 1 and subnet 2 which are having EC2 instance A and EC2 instance B respectively.
+-Its the same VPC but different subnets.
+-Lets say ec2 instance A sends a request to EC2 instance B.
+-By default,every outbound request is allowed by a security group of a ec2 instance.
+-Then the request goes to a Network ACL.The network ACL checks the outgoping request if it is on the approved list or not.
+-If it is approved , then the request goes to the NACL(Network Access Control List) of Subnet 2.
+-Every subnet has a unique ACL with their own checklists.
+-If the request is approved there,then it goes to the security group of EC2 instance B and if there it is approved , it finally reaches the instance.
+
+Once the transaction is complete, now its the time to come home.
+
+**-Its the return traffic pattern which is the most interesting,because this is where the stateful vs stateless nature of the different engines come into play.Because the packet still needs to be evaluated at each checkpoint.
+-The security groups by default allow the return traffic out no matter what.
+-In the ACL , every ingress and eggress is checked in the list.
+-The ACL dont care dont know if yoyu have been in there or not.The package return address has to be on their approved list in order to cross the ACL border.
+-Stateless control means it always checks its lists.
+-While going back to subnet 1 , it has to go through its subnet as well.
+-Here comes the main meaning of being stateful.
+-Since now the request has made it back to instance A , the security group of instance A recognizes the packet from before.So it doesnt need to check of it is allowed in
+
+
+
+
 
 
 
