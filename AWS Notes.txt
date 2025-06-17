@@ -1146,11 +1146,153 @@ Once the transaction is complete, now its the time to come home.
 -Stateless control means it always checks its lists.
 -While going back to subnet 1 , it has to go through its subnet as well.
 -Here comes the main meaning of being stateful.
--Since now the request has made it back to instance A , the security group of instance A recognizes the packet from before.So it doesnt need to check of it is allowed in
+-Since now the request has made it back to instance A , the security group of instance A recognizes the packet from before.So it doesnt need to check of it is allowed in .
+
+
+More ABout Network ACL :-
+
+-A network ACL is a virtual firewall that controls inbound and outbound traffic at the subnet level.
+-For example, step outside of the coffee shop and imagine that you are in an airport. In the airport, travelers are trying to enter into a different country. You can think of the travelers as packets and the passport control officer as a network ACL. The passport control officer checks travelers’ credentials when they are both entering and exiting out of the country. If a traveler is on an approved list, they are able to get through. However, if they are not on the approved list or are explicitly on a list of banned travelers, they cannot come in.
+
+-Each AWS account includes a default network ACL. When configuring your VPC, you can use your account’s default network ACL or create custom network ACLs. 
+-Stateless packet filtering:-
+  -Network ACLs perform stateless packet filtering. They remember nothing and check packets that cross the          subnet border each way: inbound and outbound. 
+  https://replit.com/@rajdubal87/AWS-Notes#StatelessNACL.png
+
+After a packet has entered a subnet, it must have its permissions evaluated for resources within the subnet, such as Amazon EC2 instances. 
+
+More About EC2 Security Groups :-
+
+Stateful packet filtering
+
+-Security groups perform stateful packet filtering. They remember previous decisions made for incoming packets.
+
+https://replit.com/@rajdubal87/AWS-Notes#NACLandSecurityGroups.png
 
 
 
+Episode 4 : Global Network
 
+-We have been talking a lot about how you will be able to interact with your aws infrastructure.
+-But how do your customers interact with your aws infrastructure.
+-If you have your website hosted on aws , user just enter the website in theri browser and enter it and some magic happens.But what exactly is this magic?
+
+Two services which help in the website case :-
+
+1)Route 53 :-
+
+-Route 53 is aws's domain name service(DNS).
+-DNS is a translation service.
+-But instead of translating between languages , it translates website names into IP or internet protocol addresses which computers can read.
+-When we enter a website in our browser , it contacts Route 53 to obtain the IP address of the site.
+-Lets consider the IP address as 192.1.1.1 , then it routes the user computer browser to that address.
+-Route 53 can direct traffic to different end points using several different routing policies such as:-
+
+i)Latency based routing
+
+Purpose:-Improve performance
+How it works:-It sends users to the aws regions with lowest network latency(fastest response time) for them.
+Example:A user from india is sent to mumbai region and a user from USA is sent to oregon region even if both regions host the same website.
+
+ii)Geolocation DNS :-
+
+here we direct traffic based on where the customer is located
+eg.Traffic in ireland is routed to Dublin Region.
+Purpose:Direct traffic based on actual location of the user.
+How it works:You define rules based on countries,continents,states
+Example:You set that all users from Ireland go to a Dublin server, and all users from India go to a Mumbai server.
+
+iii)Geoproximity routing :-
+
+Purpose: Direct traffic based on how close the user is to your resources.
+How it works: You use Route 53 + AWS traffic flow to manage this. You can also shift traffic more toward a specific region using a bias.
+Example: If you want to route more users towards Singapore, even if they are closer to Mumbai, you can increase Singapore's bias to attract more traffic.
+
+iv)Weighted Round Robin:-
+Purpose: Split traffic between multiple resources — useful for load balancing, testing, or gradual rollouts.
+-Gradual rollouts (also called canary releases or phased deployments) mean releasing a new feature or version of your application to a small portion of users first, and increasing the rollout gradually to more users over time.
+-This helps catch bugs, performance issues, or user experience problems before affecting everyone.
+How it works: You assign weights (percentages) to different endpoints.
+Example: Send 70% of users to Server A and 30% to Server B.
+
+
+-You can even use Route53 to register domain names,so you can buy and manage domain names on aws.
+
+2)Amazon Cloudfront :-
+-It is a service helps speed up delivery of website assets customers.
+-We talked about edge locations earlier in the course , these locations are serving contents as close to customers as possible and one part of that is the content delivery network or CDN.
+-A CDN is a network that delivers edge content to users based on their geographic locations.
+For example , if the users are in north america , wwe host the website in oregon which is the nearest location.
+-And deploy all the static web assets like images,GIF's in Cloudfront in north america.
+example 2: we deploy the website in dublin for irish users and deploy all the assets in amazon cloudfront in ireland.
+
+Suppose your main website is hosted in Oregon (US):
+
+    -A user from India tries to open your site.
+
+    -Without a CDN: they download images/CSS from Oregon (slow).
+
+    -With CloudFront: those assets are already cached in a CDN Edge Location in Mumbai (faster).
+
+So CloudFront serves assets from the nearest possible server, making the website load faster for everyone.
+
+
+More About Amazon Route 53:-
+-You can use Route 53 to manage DNS for websites, servers, or services that are not hosted on AWS — for example, services running on GoDaddy, Heroku, DigitalOcean, Azure, on-prem servers, etc.
+https://replit.com/@rajdubal87/AWS-Notes#AmazonRoute53.png
+
+
+Module 5 : Storage And Databases
+
+Episode 2 : Instance Stores and Amazon Elastic Block Stores (Amazon EBS)
+
+-When you are running aws to host business applications, those applications need CPU,GPU,memory and storage.
+-As applications run , they will oftentimes need access to block-level storage.
+-You can think of block level storage as a place to store files.
+-A file being a series of bytes that are stored in blocks on disc.
+-When a file is updated, the whole series of blocks arent all overwritten.
+-Instead it updates just the pieces that change.
+-This makes it an efficient storage type when working with applications like databases , enterprice software or file system .
+-When you are using your laptop or computer , you are accessing your block level storage.
+-All block level storage in this case is your hard drive.
+-EC2 instances has hard ddrives as well and there are a few different types.
+-Depending on the EC2 instance you have launched , it might provide you with local storage called instance store volumes.
+-These volumes are physically attached with the hosts your EC2 instances running on top of.
+Picture For Reference:https://replit.com/@rajdubal87/AWS-Notes#InstanceStoreVolumes.png
+
+-You can write to it just like normal hard drive.
+-The catch here is since the instance store volume is attached to the underlying physical host,
+if you stop or terminate your EC2 instance,all data written to the EC2 instance store volume will be deleted.
+-The readson for this is if you start  your instance from the stop state,it's likely that EC2 instance will startup on another host , a host where that volume does not exist.
+-Remember,EC2 instance are virtual machines and therefore the underlying host can change , between stopping and starting an instance.
+-Because of this ephermal or temporary nature of instance store volumes , they are useful in the situations where youi can loose the data being written to the drive.
+-Such as temp files,scratch data and data that can be easily recreated without consequences.
+
+So you will want a storage that persists outside of the life cycle of an EC2 instance.
+
+Amazon Elastic Block Store(EBS) :-
+
+-With EBS you can create virtual hard drives which we call EBS volumes , that you can attach to your EC2 instances.
+-These are separate drives from your local instance store volumes , adn they arent tied directly to the host.
+-This means data in a EBS volume can persist between stops and start of a EC2 instance.
+-EBS volumes comes in all different sizes and types.
+-You define-
+i)Size
+ii)Type
+iii)Configurations 
+
+of the volume you need.
+-Provision the volume and attach it to your EC2 instance.
+-From there you will have to configure your application to write to the volume and you are good to go.
+-If you start and stop the EC2 instance,the data in the volume remains.
+
+-Also it is important to back that data up.
+-EBS allows you to take incremental backups of your data called snapshots.
+-It is recommended to take regular snapshots of data,so even if your drive is corrupted,you dont loose the data.
+-Picture for reference for EBS snapshots : https://replit.com/@rajdubal87/AWS-Notes#AmazonEBSSnapshots.png
+
+How does EBS Snapshots work?
+-It first takes backup of all data and incrementally backs up data that has changes since the most recent snapshots.
 
 
 
