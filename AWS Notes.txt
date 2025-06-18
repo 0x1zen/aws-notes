@@ -1295,6 +1295,53 @@ How does EBS Snapshots work?
 -It first takes backup of all data and incrementally backs up data that has changes since the most recent snapshots.
 
 
+Amazon Simple Storage Service(S3) :-
+
+-It is a data storage that lets you store and retrieve a virtually unlimited amount of data at any scale.
+-Instead of storing the data in a file directory , you store them in what we call buckets.
+-Think of a file sitting on your hard drive, thats an object.
+-Think of a file directory,thats a bucket.
+-The maximum object size that you can upload is 5 Terabytes(5TB).
+-You can also version objects to prevent them from accidental deletion.
+-What it means that you always retain the previous versions of the objects , its similar to how git works.
+-You can also create multiple buckets and store them in different classes or tier of data.
+-You can then create permissions to set who can see or access the data.
+-You can also stage data between tiers.
+-These tiers offer mechanisms for different storage use cases such that data that needs to be accessed frequently or audit that that needs to be retained for several years.
+
+Tiers of storages in Simple Storage Service :-
+
+1)Amazon Simple Storage Service(S3) standard :-
+-The first storage class is called Amazon S3 standard and comes with 11 9s of durability.
+-That means a object stored in S3 standard has a durability of 99.999999999% probabilty that it will remain intact after one year.
+-Furthermore , data is stored in such a way that aws can sustain the concurrent loss of data in 2 separate storage facilities.
+-THis is because data is stored in atleast 3 facilities so multiple copies reside accross mutliple locations.
+-Another useful way of using Amazon Simple Storage Service(S3) is for static website hosting.
+-You can do this by storing the html files and static web assets in a bucket and then checking a box to mark it as a static website.
+-You can then enter the bucket's URL and then bam instant website.
+
+2)Amazon Simple Storage Service(S3) Infrequent Access or S3 Standard-IA :-
+
+-It is used for data that is accessed less frequently but requires rapid access when needed.
+-This means this the perfect place to store backups,disaster recovery files , or any object that requires long term storage.
+
+3)Amazon S3 Glacier Flexible Retrieval :-
+
+-Another storage class or tier that lends itself to the exmaple of audit data.
+-say we will have to retain data for several years for auditing purposes and we dont need it to be retrieved very rapidly.
+-THen we can use S3 Glacier FLexible Retreival to archieve that data.
+-To use S3 glacier flexible retrieval ,you can simply move data to it or you can create vaults and then populate them with archives.
+-And if you have compliance requirements for retaining data for say a certain period of time you can employ an S3 glacier vault lock policy and lock your vault.
+-You can specify controls such as write once/read many or WORM in a vault lock policy and lock the policy from future edits.
+-Once locked, the policy can no longer changed.
+-You also have three options for retreival.
+-These range from minutes to hours and you can change the option of uploading directly to S3 glacier flexible retrieval or using S3 lifecycle policies.
+
+What are S3 lifecycle policies:-
+
+-they are policies that you can create to move data automatically between tiers.
+-For example , say we want to keep an object in S3 standard for 90 days and then we want to move it to S3 standard IA
+
 
 
 
