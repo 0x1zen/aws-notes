@@ -1340,7 +1340,80 @@ Tiers of storages in Simple Storage Service :-
 What are S3 lifecycle policies:-
 
 -they are policies that you can create to move data automatically between tiers.
--For example , say we want to keep an object in S3 standard for 90 days and then we want to move it to S3 standard IA
+-For example , say we want to keep an object in S3 standard for 90 days and then we want to move it to S3 standard IA for the next 30 days.
+-Then after 120 days of total , we want to move it to S3 glacier flexible retrieval.
+-With lifecycle policies , you create that configuration without changing your application code and it will perform those moves for you automatically.
+-Its another example of a managed aws service helping take that burden of you so you can focus more onthe business needs.
+
+4)There are also other storages like S3 one zone infrequent access ,S3 glacier instant retrieval , and s3 glacier deep archieve.
+-S3 one zone IA is same as S3 IA , just that the data is stored in one Availability zone and is less resilient to regional failures.
+-S3 glacier deep archieve is lowest cost and takes upto 12 hours for retireval of data .best for compliance recors which needs to be stored but access almost none.
+
+
+Object Storage :-
+
+https://replit.com/@rajdubal87/AWS-Notes#ObjectStorage.png
+
+-The data might be an image, video, text document, or any other type of file. Metadata contains information about what the data is, how it is used, the object size, and so on. An object’s key is its unique identifier.
+
+S3 Intelligent-Tiering:-
+
+-Ideal for data with unknown or changing access patterns
+-Requires a small monthly monitoring and automation fee per object
+-In the S3 Intelligent-Tiering storage class, Amazon S3 monitors objects’ access patterns. If you haven’t accessed an object for 30 consecutive days, Amazon S3 automatically moves it to the infrequent access tier, S3 Standard-IA. If you access an object in the infrequent access tier, Amazon S3 automatically moves it to the frequent access tier, S3 Standard.
+
+
+AWS S3 Outposts :-
+
+ What is AWS Outposts?
+
+AWS Outposts is a hybrid cloud solution from AWS.
+✅ Key Idea:
+
+It brings AWS infrastructure and services to your on-premises location. Basically, Amazon ships a rack full of servers to your data center, and it runs AWS services locally, but managed by AWS.
+
+S3 Outposts
+Creates S3 buckets on Amazon S3 Outposts
+
+Makes it easier to retrieve, store, and access data on AWS Outposts
+
+Amazon S3 Outposts delivers object storage to your on-premises AWS Outposts environment. Amazon S3 Outposts is designed to store data durably and redundantly across multiple devices and servers on your Outposts. It works well for workloads with local data residency requirements that must satisfy demanding performance needs by keeping data close to on-premises applications.
+
+
+Episode 3 : Comparing Elastic Block Storage and Simple Storage Service
+
+Amazon EBS :-
+
+-You can create a single EBS volume as large as 16 TiB (Tebibytes).
+-Survives termination of their EC2 instance.
+-Solid State by default.
+-HDD options
+Use Case:- You have a 80 GiB video file that you are dooing video corrections on.
+-To know the best storage class here we need to understand the difference between object storage and block storage.
+-Object storage treats any file as a complete discrete object.Now this is great for documents and images and video files that gets uploaded and gets consumed as entire objects but everytime there is a change to the object , you must re upload the entire file.There are no delta updates.
+-This is because S3 treats each object as a single, immutable unit. If you want to modify any part of the object (file), you must upload a new full version of it.
+-S3 Versioning allows you to keep multiple versions of the object, but:
+-It does not support editing part of an object.
+-It just saves each full upload as a new complete version.
+
+-Block storage breaks that component down to small component parts or blocks.
+-This means for that 80 GiB file , you make a edit for that 1 scene in the film and save that change , the engine only updates the blocks where these bits live.
+-So if you are making a bunch of micro edits , EBS is perfect for it.
+-If you would have been doing changes in an object is S3 , the system would have to upload the entire 80GiB file again.
+
+Amazon S3 :-
+
+-Unlimited Storage
+-Individual objects upto 5TB in size.
+-WORM(Write once read many).
+-11 9s(99.999999999)% durable.
+Use case:-Lets say you have a photo analysis website where users upload a picture of themselves , adn your website tells which animal looks like you .
+-You have potentially millions of animal pictures that all need to be indexed and possibly be viewed by thousands of people at once.
+-This is the perfect use case for S3.
+-S3 is already web enabled , every obejct has a URL and yopu can put access rights to who can see or access your object.
+-Its regionally distributed , so no need to woprry about backup strategy.
+-Offers cost savings compared to EBS with additional advantage of being serverless.
+-No need of a EC2 instance for this.
 
 
 
