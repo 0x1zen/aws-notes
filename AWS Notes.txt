@@ -1416,6 +1416,91 @@ Use case:-Lets say you have a photo analysis website where users upload a pictur
 -No need of a EC2 instance for this.
 
 
+Amazon Elastic File System (EFS) :-
+
+-EFS is a managed file system.
+-Its common for businesses to have shared file sstem accross their aplications.
+-For example you might have mutliple servers running analytics on large amount of data being stored in  a shared file system.
+-This data is traditionally hosted on premises.
+-In this on-prem data center you would have to ensure that the storage you have can keep up with the amount of data you are storing.
+-Make sure backups are taken and the data is stored redundantly as well as manage all of the servers hosting that data.
+-With AWS you dont have to worrry for all that buying hardware and managing servers.
+-With EFS , you can keep existing file systms in place but let aws do all the heavy lifting of the scaling and the replication .
+-EFS allows you to have multiple instances accessing the data in EFS at the same time.
+-It scales up and down without you needing to do anything to make that scaling happen.
+-When it says "EFS allows you to have multiple instances accessing the data at the same time," it means:
+-Multiple EC2 instances (virtual machines) can mount the same EFS file system concurrently and read/write to the same files or folders, just like a shared drive in a local network.
+-But even Amazon Elastic Block Storage lets you store files, that I can acces from a EC2 instance.
+-What exactly is the difference here?
+-Amazon EBS volumes attach to EC2 instances and are an availability zone level resource.
+-In order to attach EC2 to EBS you need to be in the same availability zone.
+-An EBS volume is physically located in a specific AZ within an AWS Region, and it can only be attached to an EC2 instance that is also in that same AZ.
+-You can save files on it or run a database on top of it or store applications on it.Its a harddrive.
+-EBS can behave like a hard disk, but what it’s actually running on depends on the type of EBS volume you choose.
+-Most users use SSD-backed EBS volumes (gp3 or io2) unless they need low-cost bulk storage.
+-If you provision a 2TB EBS volume and fill it up , it doesnt automatically scale to give you more storage.
+-Where as Amazon EFS can have multiple EC2 instances reading and writing from it at the same time.
+-But it isnt just a  blank hard drive that you can write to.It is a true file system for linux.It is already formatted and knows file directories , access permissions etc unlike EBS.
+-It is a regional resource meaning any EC2 instacne from that region can write to the file system.
+-As you write more data to EFS , it automatically scale.
+-No need to provision any more volumes.
+-Additionally, on-premises servers can access Amazon EFS using AWS Direct Connect.
+
+
+Amazon Relational Database Service (RDS) :-
+
+-From the coffee shop example , you are storing data about your coffee shop in mutiple storage devices.
+-But now you have a need to have relationships between data that you have.
+-By relations I mean maybe a customer buys same coffee mutliple times, maybe you want to give him a promotional discount for the next time and you need a way to keep track of this relationship somewhere.
+-In this case its best to use a relational database management system.
+-It means you store data in a way it relates to other pieces of data.
+-What are all the databases supported by AWS?
+1)MySQL
+2)PostgreSQL
+3)Oracle
+4)Microsoft sql server
+
+-You might be running one of those and they are most likely housed in your data center.
+-But is there way to easily move them to cloud?Yes.
+-You can do what we call lift and shift and migrate the database to run on amazon EC2.
+-This means you have control over the same variables you do,in your on premises environment.
+-These variables are such as OS,memory,CPU,storage capacity and so forth.
+-It's a quick entry to the cloud and you can migrate them using standard practices or using something like database mitgration service.
+-The more managed way to use databases in the cloud is through Amazon Relational Database Service.
+-It supports all the major database engines, like the ones we mentioned earlier , but this service comes with added benifits.
+-These include automated patching , backups , redundancy ,failover , disaster recovery all of which you will have to manually manage yourself.
+
+
+Amazon Aurora :-
+
+-It's ur most managed relational database option.
+-It comes in two forms , MYSQL and PostgreSQL.
+-The data is replicated at different facilities so that you have 6 copies of data at any given time.
+-You can also deploy upto 15 read replicas so you can offload your reads and scale performance .
+-You can create copies of your primary Aurora database that are read-only and automatically kept in sync. These replicas can handle read queries, which helps reduce load on the main database and improve performance and scalability.
+-Additionally there are continuos backups to S3 , so you always have a backup ready to restore.
+-You also get point-in-time recovery so you can recover data from a specific period.
+
+
+More About Amazon RDS :-
+
+-Amazon RDS is a managed service that automates tasks such as hardware provisioning, database setup, patching, and backups.
+-Amazon RDS provides a number of different security options. Many Amazon RDS database engines offer encryption at rest (protecting data while it is stored) and encryption in transit (protecting data while it is being sent and received).
+-Amazon RDS is available on six database engines, which optimize for memory, performance, or input/output (I/O). Supported database engines include:
+
+Amazon Aurora
+PostgreSQL
+MySQL
+MariaDB
+Oracle Database
+Microsoft SQL Server
+
+More About Amazon Aurora :-
+
+-Amazon Aurora(opens in a new tab) is an enterprise-class relational database. It is compatible with MySQL and PostgreSQL relational databases. It is up to five times faster than standard MySQL databases and up to three times faster than standard PostgreSQL databases.
+-Amazon Aurora helps to reduce your database costs by reducing unnecessary input/output (I/O) operations, while ensuring that your database resources remain reliable and available. 
+
+
 
 
 
