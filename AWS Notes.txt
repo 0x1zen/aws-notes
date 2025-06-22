@@ -1501,6 +1501,154 @@ More About Amazon Aurora :-
 -Amazon Aurora helps to reduce your database costs by reducing unnecessary input/output (I/O) operations, while ensuring that your database resources remain reliable and available. 
 
 
+Amazon Dynamo DB :-
+
+-At most basic level, amazion dynamo DB is a database.
+-It's a serverless database.
+-Meaning you dont need to manage underlying instances or infrastructure powering it.
+-With DynamoDB you create tables.A DynamoDB table is a place where you can store and query data.
+-Data is organized into items, and items have attributes.
+-Attributes are just different features of your data.
+-If you have 1 item in your table or 2 million items in your table , DynamoDB manages the underlying storage for you and you dont have to worry about the scaling of the system , up or down.
+-DynamoDB stores this data redundantly accross availability zones and mirrors the data accross mutliple drives under the hood for you .
+This refers to replicating (copying) your data onto multiple physical storage devices (SSDs) within the same Availability Zone (AZ).
+So:
+When you write a record to DynamoDB, it is instantly copied to multiple SSDs (storage drives) within that zone.
+This ensures that if one drive fails, your data is still safe and accessible from another one.
+
+-DynamoDB doesnt use widely used query language like SQL.
+-Relational databases like MYSQL need a schema defined that store related tables.
+-But these kind of databases might have performance issues when under stress.
+-These databases might not be the perfect fit when your dataset is less rigid(less strict for datatype).
+-This is where NoSQL databases comes in.
+-DynamoDB is a non-relational database tend to have simple flexible schemas,not complex rigid schemas laying out multiple tables that all relate to each other.
+-With DynamoDB you can add or remove the attributes of items from the table at any time.
+-Not every item in the table has to have the same attributes.
+-Because of this flexibility you cannot run complex sql queries on it.
+-Instead you write queries based on small subset of attributes that are designated as keys.
+-Because of this the queries that you run on non-relational databases tend to be simpler and focus on a collection of items from one table not queries that span multiple tables.
+-Also , the dynamoDB is purpose built.This will not be the perfect fit for some use cases.
+-DynamoDB is serverless, which means that you do not have to provision, patch, or manage servers. 
+-You also do not have to install, maintain, or operate software.
+
+Amazon Redshift :-
+
+-You want to run business intelligence or BI projects against data coming from different data stores like your inventory , your financial and your retail sales system.
+-A single query against multiple databases sounds nice , but traditional databases dont handle them easily.
+-Once data becomes too complex to handle with traditional relational databases , you've entered the world of data warehouses.
+-Data warehouses are engineered specifically for this kind of big data where you are looking at historical analysis(To analyze past trends, generate business reports, and make strategic decisions.) as opposed to operational analysis(To support day-to-day operations of an application or system).
+-Historical maybe as soon as : show me last hours sales numbers accross all the stores.The thing here is the data is set right now.Like the last hours sales numbers wont change because its in the history now.
+-Now compare this question to how many bags of coffee we still have in our inventory right now?
+-Which could be changing as we speak.Because its happening right now.
+-As long as your business question is looking backwards at all,then a data warehouse is the right solution for that line of business intelligence.
+-Now there are many data warehouse solutions out in the market.If you already have a favourite one, running it on aws is just a matter of getting the data transferred.
+-But it would be better for a business to focus on the data rather than caring for the tuning of a data warehouse engine and management of it.
+-This(Amazon Redshift) is data warehousing as a service.
+-Amazon Redshift is a fully managed, petabyte-scale data warehouse service by AWS that’s optimized for analytics — enabling you to run complex queries and generate business intelligence (BI) insights across massive datasets.
+
+AWS Data Migration Service :-
+
+-What happens if you have a database on prem or in the cloud already?
+-AWS offers a service called Amazon Database Migration Service(DMS) to help customers migrate the database.
+-DMS helps customers migrate existing databases onto aws in a secure and easy fashion.
+-You essentially migrate your database from a source to a target database.
+-The best part is that te source database remains fully operational during database migration.
+-The source and target databases doesnt have to be of the same type.
+
+-Lets start with databases that are of the same type.These migrations are known as homogenous operations and can be from MYSQL to Amazon RDS MySQL or MSSQL Server to AMAZON RDS SQL Server.
+-The process is fairly straighforward since schema structures , data types and database code is compaitible between source and target.
+-The source database can be running on on-premises , Amazon EC2 instances or it can also be an amazon rds database.
+-The target itself can be a database in amazon RDS or Amazon EC2.
+-In this case, you create a migration task with connections to source and target databases.
+-Then you can start the migration service with a click of a button.
+-The second type of migration is heterogenous migration which occurs when source and target databases are of different types.
+-Since the schema structure , data types and database code are different between source and target , we first need to convert them using the aws schema conversion tool.
+-This will convert the source schema and code to match that of the target database.
+-Then next step is to use Data migration service to migrate the data from source database to the target database.
+-But these are not the only use cases for DMS.
+-Others include developement and test database migrations , database consolidation and even continuos database replication.
+
+Development and Test database migrations :-
+
+-Its when you want to develop this to test against the production data but without affecting production users.
+-In this case you use Database Migration Service to migrate a copy of your production database to your dev or test environments either once off or continuosly.
+
+Database Consolidation :- 
+
+-Database consolidation is when you have several databases and want to consolidate(.
+to join things together into one; to be joined into one) them into one single database.
+
+Continuos Replication Of Database :-
+
+-Its when you use DMS for continuos data replication , this could be for disaster recovery or geographic replication
+
+
+Additional Database Services :-
+
+Amazon DocumentDB : Great for content management , catalog , user profiles.
+-Amazon DocumentDB(opens in a new tab) is a document database service that supports MongoDB workloads. (MongoDB is a document database program.)
+
+Amazon Neptune : -A graph database , engineered for social networking and recommendation engines, also great for fraud detection needs.
+-You can use Amazon Neptune to build and run applications that work with highly connected datasets, such as recommendation engines, fraud detection, and knowledge graphs.
+
+Amazon Managed Blockchain : -Amazon Managed Blockchain(opens in a new tab) is a service that you can use to create and manage blockchain networks with open-source frameworks. 
+
+Amazon quantum ledger database (QLDB) :- A immutable system of record where any antry can never be removed from the audits.
+-Amazon Quantum Ledger Database (Amazon QLDB)(opens in a new tab) is a ledger database service. 
+-You can use Amazon QLDB to review a complete history of all the changes that have been made to your application data.
+
+Database Accelerators :- Starting with adding caching layers on top of your databases that could improve the read times of common requests from milliseconds to microseconds.
+
+Amazon Elasticache :- It provides those caching layers without your team need to manage it.
+-It comes with both memcached and redis flavors.
+-Amazon ElastiCache(opens in a new tab) is a service that adds caching layers on top of your databases to help improve the read times of common requests. 
+
+Amazon DynamoDB Accelerator : - If you are using dynamoDB try using DAX, the dynamoDB accelerator.It is a native caching layer designed to dramatically improve read times for your non-relational data. 
+-Amazon DynamoDB Accelerator (DAX)(opens in a new tab) is an in-memory cache for DynamoDB. 
+
+Q.What is a enterprise class relational database?
+-Amazon Aurora
+
+
+Module 6 :Security
+
+The Shared Responsibility Model :-
+
+-With the shared responsibilty model , AWS controls the security "of" the cloud , and customers control security "in" the cloud.
+-AWS controls the data centers, security of the services etc.
+-Refer this image :- https://replit.com/@rajdubal87/AWS-Notes#SharedResponsibiltyModel.png
+-The part of the workload that aws customers run "in" the cloud and this is the customers responsibilty to secure.
+-The AWS Shared Responsibility Model defines who is responsible for what when you use AWS cloud services — it clearly separates responsibilities between AWS (the cloud provider) and you (the customer).
+-The shared responsibilty model is nothing different than securing a house.
+-The builder constructed the house with 4 walls and a door.
+-It's their responsibility to make sure the walls are strong and the doors are solid.
+-Its your responsibility(the home owner) to close and lock the doors.
+
+Layers Of Shared Responsibility :-
+1)Physical : This is iron and concrete and fences and security gaurds.Someone has to own the concrete, someone has to staff the perimeter 24/7.This is AWS.
+2)Network And Hypervisor : On top of physical layer, we have network and hypervisor which has gone through several third party audits.
+3)Operating System:-On EC2 you now get to pick what operating system you want to run.
+-This is the dividing line that separates AWS's responsibility and customers responsibility.
+-This is customers operating system and customer is 100% incharge of this.
+-Customer is the only person who has the encryption key to log on to the root of OS or to create any user accounts there.
+-AWS cannot enter customers operating system.
+4)Applications:- On top of this OS we can run whatever applications we want.
+-Customer owns it and maintains it.
+5)Data :- This is always customer's domain to control.
+-Who has access to data is customers responsibilty.
+-AWS provides all the tools required fot the customer to keep the data safe with the ubiquitous encryption.
+-Ubiquitous encryption refers to the practice of encrypting all data—everywhere, all the timeby default, regardless of whether it’s at rest, in transit, or even in use.
+-So even if you keep the door open , no one could read the encrypted content.
+
+
+
+
+
+
+
+
+
+
 
 
 
