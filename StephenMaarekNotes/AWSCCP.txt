@@ -1,0 +1,759 @@
+Section 3: What is Cloud Computing
+
+How do websites work?
+
+-We have a server and we as a browser needs access to that server to visualize a website.
+-What we as clients are going to do is use a netork.A network between client and server.
+-The client will find the network and use the network to route the packet's , the data into the server.
+-Then the server will reply to us and we will get the response , and we can view a website.
+-The clients to find the server and the server to find the clients, you need to have IP addresses.
+-So clients have IP addresses and a server also have a IP address.
+-And so the idea is that when you use an IP address, you can send a request to wherever you want , to the server you want , and the server knows how to find you back.
+
+What is a server composed of?
+
+1)CPU - A server is going to contain a CPU.And a CPU is a little piece that will be doing some computations.
+2)RAM - Your server also needs RAM or memory .This is going to be very very fast memory, which will allow us to store information and retrieve it very quickly.
+3)Storage - In computers we have storage to store data.For example files.
+4)Database - If we want to store the data in a very structured format , we want to be using a database.
+-Database will be going to have data which will be well structured and we can search and query it.
+5)Network - Its going to be routers , switch , dns servers etc.
+
+-The cloud gives us all of these things on demand.
+
+Network :- cables , routers and servers connected with each other.
+Router :- A networking device that forwards data packets between computer networks .They know where to send the packets on the internet.
+Switch:- Takes a packet and send it to the correct server / client on your network.
+
+So, our client will send the data to a router , the router will find its way all the way to a switch, and the switch will know which computer in your network to send the data to.
+
+The traditional approach :-
+
+-People who used to start their websites used to go to stores and buy their own servers and put it into their garage or home and start it.Just like how google was started.
+-But,if your business grows, you gonna need more servers, more electricity, cooling , maintainance etc.
+-Also the scaling will be limited and you will need to have a team who monitors this infrastructure 24/7.
+-So,can we extranalize this?Yes.
+
+What is cloud computing?
+
+-Cloud computing is the on demand delivery of the compute power , database storage , applicatons and other IT resources over the internet.
+-On demand means you get it when you need it.
+-Througha cloud services platform , you are going to get pay-as-you-go pricing.
+
+
+Amazon Web Services :-
+
+-Amazon web services owns and maintains the network connected hardware required for these application services , while you provision and use what you need via a web application.
+
+The deployment models of the cloud:-
+
+1)Private Cloud : Cloud services used by a single organization , not exposed to the public.
+-Organization have complete control over it.
+-Security for sensitive applications.
+-Meets specific business needs.
+For example . rackspace
+
+ What is Rackspace?
+
+Rackspace is a cloud computing company that provides managed cloud services. They help businesses deploy, operate, and optimize cloud infrastructure across platforms like:
+1)AWS
+2)Microsoft Azure
+3)Google Cloud
+4)Their own private cloud offering
+
+So they’re not just a cloud provider — they’re more like cloud enablers or partners, especially for companies that want help managing cloud systems.
+
+2)Public Cloud :- Cloud resources owned and operated by a third party cloud service provider delivered over the internet.
+For example. AWS , GCP and Azure.
+
+3)Hybrid Cloud :- Here we mix up private and public.
+-We keep some servers on premises and extend some of the capability to the cloud.
+-Control over sensitive assets in your private infrastructure.
+-Flexibility and cost effectiveness of the public cloud.
+
+The Five Characteristics Of Cloud Computing :- 
+
+1)On-demand and self service :- Users can provision resources and use them without human interaction from the service provider.
+2)Broad Network Access :- Resources are available over the network , and can be accessed by diverse client platforms.
+3)Multitenancy and resource pooling :- Multiple customers can share access the same resources and applications while still having security and privacy.
+4)Rapid elasticity and scalability :- Automatically and quickly acquire and dispose resources when needed.
+-Quickly and easily scale on demand.
+5)Measured service :- Usage is measured, users pay exactly for what they have used.
+
+IaaS – Infrastructure as a Service
+💡 What it is:
+IaaS provides virtualized computing resources over the internet. This includes servers, storage, networking, and virtualization. Users manage the OS, middleware, and apps themselves.
+
+📌 You manage:
+Operating System
+Middleware
+Applications
+Data
+
+Cloud provider manages:
+Virtualization
+Servers
+Storage
+Networking
+
+🛠 Examples:
+Amazon Web Services (AWS) EC2
+Microsoft Azure Virtual Machines
+Google Compute Engine
+
+🧠 Use Case:
+A startup wants full control over their web server environment and decides to run their own stack (Linux, Apache, MySQL, PHP) on virtual machines in AWS EC2.
+
+✅ 2. PaaS – Platform as a Service
+💡 What it is:
+PaaS provides a platform for developers to build, test, deploy, and manage applications without managing the underlying infrastructure.
+
+📌 You manage:
+Applications
+Data
+Cloud provider manages:
+Runtime
+Middleware
+OS
+Servers
+Storage
+Networking
+
+🛠 Examples:
+1)Google App Engine
+2)Heroku
+3)Microsoft Azure App Services
+
+🧠 Use Case:
+A developer wants to build a web app but doesn't want to manage servers. They deploy their app on Heroku, which automatically handles scaling, deployment, and runtime.
+
+✅ 3. SaaS – Software as a Service
+💡 What it is:
+SaaS delivers fully functional software applications over the internet on a subscription basis. Users only use the software; everything else is managed by the provider.
+
+📌 You manage:
+Nothing (just use the software)
+
+Cloud provider manages:
+
+Everything: App, Data, OS, Infrastructure, etc.
+
+🛠 Examples:
+1)Google Workspace (Docs, Sheets, Gmail)
+2)Microsoft 365
+3)Salesforce
+4)Zoom
+
+Use Case:
+A company uses Google Docs for document collaboration. They don’t need to install or maintain any software — just login and use it from any browser.
+
+AWS Global Infrastructure :-
+
+1)AWS Region - it is a cluster of data centers.
+-Most AWS services are region scoped.
+2)Availability Zones - Each region has a minimum of 3 availability zones.
+-Each AZ is one or more discrete data centers with redundant power,networking and connectivity.
+-They are separate from each other so they are isolated from disasters.
+-Connected with each other with high bandwidth low latency.
+3)Local Zones
+4)Points of presence - These are AWS Edge Locations.
+-Content is delivered to end users with lowest latency.
+5)Network
+
+Tour Of AWS Console :-
+
+Global Services :-
+1)Identity and Access Management.
+2)Route53 DNS Service
+3)Cloudfront Content Delivery Network
+4)WAF(Web Application Firewall)
+
+Region Scoped:-
+1)Amazon EC2(Infrastructure as a service)
+2)Elastic Beanstalk(platform as a service)
+3)Lambda(function as a service)
+4)Rekognition(softweare as a service)
+
+The AWS Shared Responsibility Model :-
+
+1)AWS is responsible for the security of the cloud
+2)You are responsible of security in the cloud.
+
+
+IAM : Users and groups :-
+
+-IAM stands for Identity and access management.It is an global service.
+-When we created an account , we created an root account.It is created by default.
+-This account should not be shared.
+-Users are people in your organization, and can be grouped.
+For example :- 
+Alice bob and charles work as devs.So they can be grouped together in a single group called developers.
+Whereas david and edward work in operations , and they can be grouped in a operations group.
+
+-A group can be only of group of users.It does not consist of other groups.
+-Users dont have to belong to a group , and a user can belong to multiple groups.
+
+Identity and access management(IAM) Permissions :-
+
+-Users or Groups can be assigned JSON documents called policies.
+-These policies define the permissions of the users.
+-If we by default give all the permissions to a user, that user can misuse it.
+-In AWS you apply the least previlege principle:dont give more permissions than a user needs.
+
+-To create a custom URL , we can use alias.This alias has to be unique.
+
+
+IAM policies inheritance :-
+
+-When we have a group of developers , we attach a IAM policy at group level.So, every member of that group will have same IAM policy.
+-We can inline policies to a user who is not part of any group.
+
+IAM Policies Structure
+
+
+{
+"Version": "2012-10-17",
+"Statement": [
+  {
+    "Sid": "AllowS3ReadAccess",
+    "Effect": "Allow",
+    "Action": [
+      "s3:GetObject",
+      "s3:ListBucket"
+    ],
+    "Resource": [
+      "arn:aws:s3:::my-demo-bucket",
+      "arn:aws:s3:::my-demo-bucket/*"
+    ]
+  }
+}
+
+1)Version :- Always include '2012-10-17'.
+-AWS introduced this policy language version on October 17, 2012, hence "2012-10-17".
+-It's not a version of your policy — it indicates the syntax and behavior rules that AWS should use to evaluate the policy.
+2)Id :- an Identifier for the policy (optional)
+3)Statements :- One or more individual statements.
+
+Statements Consist of :-
+
+1)Sid :- it is an identifier for the statement (optional).
+2)Effect :- Whether the statement allows or denies the access(Allow , Deny).
+3)Principal :- account/user/role to which this policy applied to
+4)Action :- list of actions this policy allows or denies.
+5)Resources :- list of resources to which the actions will be applied to
+6)Condition :- conditions for when this policy is in effect.
+
+The AdministratorAccess Policy :-
+
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": "*",
+            "Resource": "*"
+        }
+    ]
+}
+
+-This means allow all actions and resources wherever this policy is applied.
+
+
+IAM Password Policy:-
+
+-Identity Access and Management password policy is used to protect the users and groups from being compromised.
+-There are two defense mechanisms here:
+
+A)In AWS you can setup a password policy:
+
+1)Set a minimum password length
+2)Require specific character types :
+-including uppercase letters
+-lowercase letters
+-numbers
+-non-alphanumeric characters 
+3)Allow all IAM users to change their own passwords or set password expiration to make them change password after some time.
+4)Prevent password reuse
+
+B)Multi Factor Authentication - MFA
+
+-Users have access to your account and can possibly change configurations or delete resources in your aws account.
+-You want to protect your root account and IAM users.
+-MFA = password you know + security device you own.
+-Main benefit here is even if a password is compromised , your account is still not compromised
+
+MFA devices options in AWS:
+1)Virtual MFA device eg.google authenticator or authy
+2)Universal second factor (U2F) security key eg.Yubikey by Yubico (3rd party).
+3)Hardware Key Fob MFA device eg . Provided by Gemalto (3rd party)
+4)Hardware Key Fob MFA device for AWS GovCloud(US). eg. Provided by SurePassID (3rd party).
+
+How Users Can Access AWS:-
+To access aws , users have three options :-
+1)AWS management console (protected by password + MFA)
+2)AWS Command Line Interface(CLI) : protected by Access keys (similar to a github Private Access Token)
+3)AWS software developer kit (SDK) :- for code: protected by access keys
+
+-Access keys are generated through aws console.
+-Users manage their own access keys.
+-Users manage their own access keys
+-Access keys are secret just like a password.
+
+-Every access key has a Access Key ID and Secret Access Key.
+
+Whats AWS CLI :-
+
+-A tool that enables you to interact with AWS services using commands in your command line shell.
+-Direct access to the public API's of AWS services.
+-You can develop scripts to manage your resources.
+-Its a alternative to aws management console.
+
+Whats AWS SDK :-
+
+-It is embedded within your application.
+-Enables you to access and manage AWS services programatically.
+-Supports multiple languages like c++,go,nodejs etc.
+-Mobile SDK's (android,ios)
+-IOT device SDK's ( Embedded C, arduino)
+
+Example: AWS cli is built on AWS SDK for python.
+
+Installing the aws cli on windows the current version is cli 2.
+
+Using CLI - 
+1)Create a access key for your IAM account
+1)aws configue
+2)give access key id
+3)give secret access key
+4)Default region as ap-south-1 which is mumbai
+5)Default output format as directly enter 
+6)aws iam list-users : it will give list of all users
+7)aws sts get-caller-identity : with this command aws security token service you can know which user is currently calling the command
+
+
+There is an alternative to terminal to issue commands towards aws:-
+
+AWS Cloudshell :-
+
+-It is a terminal aws cloud which is browser based.
+-If you create any file in aws cloudhsell environment, it will stay as saved.For example 
+echo "test" >  demo.txt
+cat demo.txt
+
+-Above command will create a text file demo.txt with "test" as text inside of it.
+-It has upload and download feature to upload and download files from it.
+
+
+IAM Roles For Services :- 
+
+-Some aws service will need to perform actions on your behalf.
+-To do so , we will assign permiossions to aws services with IAM roles .
+-These IAM roles are like normal roles but it will be applied to aws services instead of physical people.
+For Eg. The EC2 instance may want to perform some actions on aws.To do so we want to create a IAM role.Together make a 1 entity.
+
+AWS Roles :- 
+
+-Role is a way of giving permissions to aws entities to do stuff on aws.
+-Allows EC2 instances to call AWS services on your behalf.
+
+IAM Security Tools:-
+
+1)IAM Credentials Report(account - level) :-
+
+-a report thatlists all your accounts users , regardless of who generated the report.
+-By account level it means whether you are logged in as root or an IAM user with sufficient permissions , the report includess all the users under that aws account ID.
+
+2)IAM Access Advisor ( user - level) :-
+
+-Access advisor shows the service permissions granted to a user and when those services were last accessed.
+-You can use thios information to revise these policies.
+
+IAM Guidelines and Best Practises :-
+
+-Dont use the root account except for aws account setup.
+-One physical user = one aws user 
+-Assign users to groups and assign permissions to groups 
+-Use strong password policy
+-Use and enforce the use of Multi factor authntication.
+-Create a give roles for giving permissions to aws services.
+-Use access keys for programmatic access (CLI/SDK)
+-Audit permissions of your account using IAM credentials report and Access Advisor(last accessed )
+-Never share IAM users and access keys
+
+
+Shared Responsibility Model For IAM :-
+
+AWS - 
+-Infrastructure(global network security)
+-Configuration and vulnerability analysis 
+-compliance validation
+
+you -
+-Users groups,roles , policies management and monitoring .
+-Enable mfa on all accounts.
+-Rotate your keys often
+-Use IAM tools to apply approprita epermissions.
+-Analyze access patterns and review patterns.
+
+
+AWS Budget Setup :-
+
+-We cannot do this from a IAM user account,we can only do this from root account.
+-Allow  IAM to see bills from account tab of root account.
+-Set zero spend budget and montly spend budget to get emails on forecasted spending,85%spend etc.
+
+
+AWS Elastic Clound Compute (EC2) :-
+
+-EC2 = Elastic cloud compute = infrasturcture as a service
+-If mainly consists in the capability of :-
+1)Renting Virtual Machines(EC2)
+2)Storing data on virtuial Drives (Elastic Block Storage(EBS))
+3)Distibuting load accross machines (ELB(elastic load balacning))
+4)Scaling services using an auto scaling group(ASG)
+
+EC2 Sizing and Configuration Options :- 
+
+-Operating System : Linux or windows or macos
+-How much compute power and cores you need(CPU)
+-how much random access memory(RAM)
+-How much storage space :
+  -Network-attached(EBS and EFS)
+  -Hardware (EC2 instace store)
+-Network card :- speed of the card , public IP address
+-Firewall rules : security group
+-Bootstrap Script (configure at first launch) : EC2 user data
+
+EC2 User Data :-
+
+-It is possible to bootstrap our instances using an EC2 user data script.
+-bootstrapping means launching commands when a machine strarts
+-The scipt is only run once at the instance first start.
+-EC2 user data is used to automate boot tasks such asd:
+1)Installing updates
+2)Installing software 
+3)Downloaduiing common files from internet
+
+-EC2 User Data Scriupt runs with root user.
+
+Types Of EC2:-
+
+-t2.micro is allowed in the free tier and we will get 750/hours a month.
+
+1)General Prupose - with a t
+2)Compute Optimized- with a c
+3)Memory Optimized  - with a R (means ram)
+4)Storage Optimized
+
+Security Group :-
+
+-Security groups are a firewall on our EC2 instance.
+-They regulate
+1)Access to prots
+2)Authorized IP ranges - IPV4 to IPV6
+3)Control of inbound network (from other to instance)
+4)Control of outbound network (from isntance to the other )
+
+-Security groups can be attached to  multiple instances
+-Locked down to a region / VPC combination
+-Does live outside the EC2 - if the traffic is blocked the EC2 instance wont see it.
+-Its good to maintain one separate security group for SSH access.
+-We can authorize other security groups in the inbound rules of a security group.
+-By default all inboundtraffic is blocked and all outbound traffic is authorized.
+
+
+Classic PORTs to know :-
+
+22 = SSH(secure shell) - log into a linux isntance
+21 - FTP(File transfer Protocol) - uplaod files into a file share
+22 = SFTP(secure file transfer protocol) - uplioad files using ssh
+80 - HTTP - access unsecured websites
+443 = HTTPS - access secured websites 
+3389 = RDP (Remote desktop protocol) - log into a windows instance
+
+Inbound Rules in Security Groups :-
+
+-Inbound rules are the rules applied to connections coming from outside to the EC2 instance.
+-They control the incoming traffic coming to EC2.
+-You can attach as many security groups to a single ec2 instance and the rules in it will just add on.
+-You can also add a single security group to multiple ec2 instances.
+
+SSH(Secure Shell) :-
+
+-It is a command line utility which lets you securely access and manage remote computers over an unsecured network.
+-Encrypts communication between two systems (client and server)
+-It works on linux , windows , mac but windows less than 10 (eg. windows 7 or 8) will use something called Putty which does the same thing as SSH.
+
+ssh command - 
+ssh -i "EC2 Learning (1).pem" ec2-user@public_ip
+
+Alternative To SSH :-
+
+EC2 Instance Connect : 
+
+-It is a web based terminal like tool where we can connect to our EC2.
+-We can also do aws configure in order to setup our access key.But this is a bad practice as anybody with access to your account can go and retirve this key.
+-Instead remember we have IAM Roles to give permissions to aws services.
+-We add a IAM role to the ec2 instance.
+-When you attach an IAM role to an instance, it can access temporary credentials from the Instance Metadata Service (IMDS)
+
+EC2 Insrtances Purchasing options :-
+
+1)On-demand instances : short workload , predictable pricing , pay by second
+2)Reserved (1 & 3 years): 
+  -Reserved Instances : long workloads
+  -Convertible reserved instances : long workloads with flexible instances
+3)Savings Plan (1 & 3 years) : commitment to an amount of usage  , long workload
+4)Spot instances : short workloads , cheap , can loose instances .
+5)Dedicated hosts : book an entire physical server , control instance placement .
+6)Dedicated instances : no other customers will share there hardware 
+7)Capacity reservations  - reserve capacity in a specif AZ for any duration.
+
+AWS Charges For IPV4 Addresses :- 
+
+Starting from 1st february there is a charge for all public IPv4 created in your account.
+-$0.005 per hour of Public IPV4.
+-IPV4 is a unique internet facing address assigned to your server or instance.
+-This is because IPV4 are becoming rare and are exhausted so the idea is to move to IPV6 which can be scaled.
+
+EC2 Storage :-
+
+-An EBS is (Elastic Block Storage) Volume is a network drive you can attach to your instances while they run.
+-It allows your instances to persist data even after termination
+-One EBS volume can only be attached to one EC2 instance
+-It is bound to a specific availability zone.
+-It is like a network drive .It uses network to communicate the instance which means there might be a bit of latency.
+-Free trie 30 gb 
+-Since they are network drives , they can be detached from a ec2 instance and attahed to another very quickly
+-Have a provisioned capacity (size in GB's and IOPS inpur output operations)
+-A EBS volume can be kep unattached.It is not necessary to attach it to a EC2 instance.
+-EBS volume has a delete on termination attribute.It controls EBS behaviour when EC2 instance is terminated.
+- A root EBS volume refers to the EBS volume that is used as the root file system for the EC2 instance.
+-This volume contains the operating system and other essential files required for the instance to boot and operate.
+-By default the root EBS volume is deleted(the attribute of 'delete on termination') is enabled.
+-By default the other attached EBS volume is not deleted(attribute disabled.)
+-You can preserver the root volume when instance is terminated.
+-While I say that in the previous lecture that EBS volumes cannot be attached to multiple instances, I know it is not true for io1 and io2 volume types: this is called the EBS Multi-Attach feature.
+
+EBS Snapshots :- 
+
+-Make a backup of your EBS volume at a point  in time .
+-Not necessary to dettach the volume to do snapshot , but it is recommended to do so.
+-We can copy snapshots from a AWS Region or AZ
+
+EBS Snapshots Archieve :- 
+
+-Move your snapshots to archieve tier that is 75% cheaper.
+-Takes 24-72 hour to restore from that archieve.
+
+Recycle bin for EBS snapshots :-
+
+-Setup roles to retain deleted snapshots so you can recover them after accidental deletion.
+-Specify retention (from 1 day to 1 year).
+-This falls under retention policy.
+
+
+Amazon Machine Image (AMI) :-
+
+-AMI are customization for an EC2 instance.
+-we have our own OS , config , softwares , monitoring etc.
+-Faster boot/config time because all your software is pre-packaged.
+-AMI are built for a specific region and can be copied accross region
+-You can launch EC2 instance from a public AMI : AWS provided
+-If you make your own AMI , you will have to make and maintain it yourself.
+-An AWS MarketPlace AMI : An AMI someone else made ( and potentially sells).
+
+
+AMI Process :-
+
+-Start an EC2 instance and customize it.
+-Stop the instance for data integrity.
+-Build a AMI out of it - this will also create a EBS snapshot
+-Launch instances from other AMI's .
+
+EC2 image builder :-
+
+-Used to automate the creation of virtual machines or container images.
+-Automate the creation , maintain and validate and test EC2 AMI's.
+-These AMI's can be distributed accross regions or AZ's.
+
+EC2 instance store :-
+
+-EBS volumes are netowork drives with good but limited performance.
+-instance store is a hardware disk attached to your ec2 instance.
+-EC2 instance store storeage will be lost when ec2 instance is stopped or terminated.
+-They are epheremal.
+-Risk of data loss if hardware fails.
+
+Elastic File System (EFS) :-
+
+-Managed NFS(network file system) that can be mounted on 100s of EC2.
+-EFS works only with Linux EC2 instances woth multi-AZ.
+
+Difference between EBS and EFS :-
+
+-EBS can only be attached to a single EC2 instance where as EFS is shared file system for multiple ec2 instances accross multiple availablity zones.
+-EBS can be backed up as snapshots then can be restored in a different ec2 in different az.
+
+EFS Infrequent Access :- 
+
+-Storage class that is cost-optimized for files not accessed everyday.
+-Upto 92% lower cost compared to EFS standard
+-EFS will automatically move your files to EFS-IA based on last time they were accessed.
+
+Amazon FSx :-
+
+-Launch 3rd party high performance file systems on AWS.
+-Fully managed service.
+
+Amazon FSx for Windows File Server :-
+
+-A fully managed , highly reliable and scalable Windows native shared file system.
+-Built on Windows file server..so this is only for windows instances.
+-Supports SMB protocol and windows NTFS
+-SMB is a network file-sharing protocol that allows applications and users to access files, printers, and other resources on a network.
+-NTFS is a file system developed by Microsoft for storing and managing data on disk drives. It is the default file system for Windows operating systems.
+
+Amazon FSx for Lustre :-
+
+-A fully managed high performance scalable file storage for High Performance Computing(HPC).
+-The name is Lustre because it is derived from Linux and Cluster.
+-eg. for machine learning , analytics etc.
+-Behind the scenes it will be storing data in a s3.
+
+Elastic Load balancing and auto-scaling groups :-
+
+-Scalability means a application/system can handle greater loads by adapting.
+-There are two kinds of scalability.
+1)Vertical Scalability - For example we upgrade a t2.micro to t2 large this means we vertically scaled it.
+-Vertical scalability means increasing the size of the instance
+-Vertical scalability is very common for non distributed systems , such as database.
+-There is a limit on how much you can scale.That is the limit of the hardware.
+
+2)Horizontal Scalability - 
+-Here you increase the number of instances / systems for your application.
+-Horizontal scaling implies distributed systems.
+
+High availablity :-
+
+-High availability usually goes hand - in - hand with horizontal scalability
+-High availablity means running your application / system in atleast 2 availability zones.
+
+
+Scalability vs Elasticity vs Agility :-
+
+1)Scalability : ability to accomodate a larger load by making the hardware stronger (sclae up) or by adding nodes (scale out)
+-Vertical Scaling = Scale Up
+-Horizontal Scaling = Scale Out
+
+2)Elasticity : 
+-Once a system is scalable,elasticity means there will be some "auto-scaling" so that the system can scale based on the load.This is cloud friendly : pay-per-use , match demand , optimize costs.
+
+3)Agility: (not related to scalability - distractor) new IT resources are only a click away , which means you reduce the time to make those resources available to your developers from weeks to within minutes.
+
+
+What is load balancing :-
+
+-Load balancers are servers that forward internet traffic to multiple servers(EC2 instances) downstream.
+-Spread load accross multiple instances downstream.
+-Expose a single point of access to your application
+-Seamlessly handle failures of downstream instances.
+-Provide SSL termination (HTTPS) for your websites.
+-High availablity accross multiple AZ's.
+
+Elastic Load Balancer (ELB) :-
+
+-An ELB is a managed load balancer.
+-AWS gaurantees that it will be working and takes cares of upgrades, maintainance , high availablity .
+-AWS provided only a few configuration knobs.
+
+4 Types Of Load Balancers offered by AWS :
+
+-Application load balancer (HTTP / HTTPS / gRPC only) - Layer 7
+-Network Load Balancer (ultra high performance , allows for TCP and UDP) - Layer 4
+-Gateway load balancer - layer 3
+-Classic load balancer(retired in 2023)  - Layer 4 and 7 (this was retired and newly launched were ALB and NLB)
+
+Difference -
+
+Application Load Balancer(ALB) : HTTP/HTTPS/gRPC protocols (Layer 7).HTTP routing features.Statis DNS(URL).Users hit one of these protocols.
+
+Network Load Balancer : 
+
+-TCP/UDP Protocols(Layer 4).
+-High performance --- millions of requests per second.
+-Static IP through elastic IP.an Elastic IP address remains static. It does not change until you release it.
+
+Gateway Load Balancer :- 
+
+-GENEVE(Generic Network Virtualization Encapsulation) Protocol on IP packets(Layer 3).
+-Route traffic to firewalls that you manage on EC2 instances.
+-Intrusion detection
+-This is also called 3rd party security virtual appliances because it is used to do analysis.
+-The traffic is first sent to GWLB, then it is forwaded to 3rd party security virtual appliances , after analyzing it is sent back to GWLB and GWLB directs traffic to EC2.
+
+Listeners and Routing in AWS :-
+
+-A listener is a process that checks for connection requests using the port and protocol you configure .
+-The rules that you define for a listener determines how the lead balancer routes requests to its registered targets.
+-We have to create a target group in listeners and routing section .A group of EC2 instances.
+-We can also create a group of Lambda functions , or even Application load balancers.
+-All the instances in your group will be on same port (80) in case of http.
+-Here targets are basically instances.
+
+
+What is an auto scaling group :-
+
+-In real-life , the load on your websites and applications can change.
+-The goal of ASG is to:
+1)Scale out(add EC2 instances) to match an increased load.
+2)Scale in (remove ec2 instances) to macth decreased load.
+3)Ensures we have an minimum and maximum number of machines running
+4)Automatically registers new instances to load balancer
+5)Replace unhealthy instances
+
+
+While creating an Auto Scaling Group :-
+
+1)We create an launch template.It is the same as launching a ec2 instance.We basically configure our EC2 here.
+2)Then we setup our VPC and we choose in what all availability zones and subnets your auto scaling groups.
+3)Then we select our load balancer.
+4)Configure Group Size And Scaling.Here we define desired capacity ,the minimum desired capacity , maximum desired capacity.For eg. 2,1,4
+5)The autoscaling groups can automatically replace unhealthy instances.They are integrated with load balancers so they automatically can add target instances to load balancers.
+
+Auto-scaling groups scaling strategies :-
+
+Desired Capacity: The number of instances you want to maintain in the group.
+Minimum Capacity: The minimum number of instances the group can scale down to.
+Maximum Capacity: The maximum number of instances the group can scale up to.
+
+-so if the load is less on desired capacity so it will basically scale down to minimum capacity and if load grows from desired capacity then it scales out to maxiomum capacity.
+-When there is no scaling event (e.g., no alarms triggered or no scheduled scaling), the group will maintain the number of instances equal to the desired capacity.
+
+1)Manual Scaling :-  update the size of an asg manually
+2)Dynamic Scaling :- To respond to changing demand
+    A)Simple / step scaling : When a CloudWatch alarm is triggered (example CPU > 70%) then add 2 units
+                              When a CloudWatch alarm is triggered (example CPU < 30%) then add 2 units
+    B)Target Tracking Scaling : Eg. I want the average ASG CPU to stay at around 40%
+    C)Scheduled Scaling : Anticipate a scaling based on known usage patterns.
+                          -For eg. Increase the minimum capacity to 10 at 5Pm on fridays.
+    D)Predictive Scaling : Using machine learning to predict future traffic ahead of time
+                           Useful when your load has predictable time based patterns.
+
+-In order to terminate a auto scaling group , we cannot terminate instances..becuase a auto scaling group will start them again.We have to delete the entire auto scaling group for that.
+
+What exactly is a target group?
+-a target group can indeed be a group of EC2 instances, but it is more accurate to think of it as a logical grouping of "targets" (which can include EC2 instances, IP addresses, or Lambda functions) that the load balancer routes traffic to.
+-The target group does not directly start or stop EC2 instances. It is simply a logical grouping of targets for the load balancer.
+
+
+
+
+
+
+
+
+
+
+
+
