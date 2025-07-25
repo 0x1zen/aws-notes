@@ -746,7 +746,71 @@ What exactly is a target group?
 -a target group can indeed be a group of EC2 instances, but it is more accurate to think of it as a logical grouping of "targets" (which can include EC2 instances, IP addresses, or Lambda functions) that the load balancer routes traffic to.
 -The target group does not directly start or stop EC2 instances. It is simply a logical grouping of targets for the load balancer.
 
+AWS Simple Storage Service (S3) :-
 
+-Amazon S3 allows people store objects(files) in buckets (directories).
+-Buckets must have globally unique name (accross all regions all accounts).
+-Buckets are defined in a region level.
+-S3 looks like a global services..but it is a regional construct.
+-Naming convention :-
+  1)No uppercase , No underscore
+  2)3-63 characters long
+  3)Not an IP
+  4)Must start with lowercase letter or number
+  5)Must not start with the prefix xn--
+  6)Must not end with suffix -s3alias
+
+-Amazon S3 objects(files) have keys.
+-These keys are full path of the object.eg.s3://my-bucket/my_file.txt
+-The key is composed of prefix + object name
+                        s3://my-bucket/prefix->my_folder/objectname->my_file.txt
+-There is no concept of directories within buckets (although the UI will trick you to think otherwise).
+
+Amazon S3 Content : 
+
+-When someone says "object values are the content of the body in Amazon S3", they are referring to the actual data stored inside an S3 object.
+-Max obejct size is 5000GB(5TB).
+-If uploading more than 5GB , must use "multi-part upload".
+-Metadata (list of text key/value paris - system or user metadata).
+-Tags(unicode key / value pair - up to 10) - useful for security / lifecycle
+-Version ID (versioning is enabled).
+
+Amazon S3 Security :
+
+User-Based
+  • IAM Policies – which API calls should be allowed for a specific user from IAM
+Resource-Based
+  • Bucket Policies – bucket wide rules from the S3 console - allows cross account
+  • Object Access Control List (ACL) – finer grain (can be disabled)
+  • Bucket Access Control List (ACL) – less common (can be disabled)
+• Note: an IAM principal can access an S3 object if
+  •  The user IAM permissions ALLOW it OR the resource policy ALLOWS it
+  •  AND there’s no explicit DENY
+• Encryption: encrypt objects in Amazon S3 using encryption keys
+
+S3 Bucket Policies :
+• JSON based policies 
+  • Resources: buckets and objects 
+  • Effect: Allow / Deny 
+  • Actions: Set of API to Allow or Deny 
+  • Principal: The account or user to apply the policy to
+
+• Use S3 bucket for policy to: • Grant public access to the bucket 
+• Force objects to be encrypted at upload 
+• Grant access to another account (Cross Account)
+
+Examples : 
+
+1)Public Access : Use Bucket Policy
+-Add a bucket policy to bucket to allow public access
+-Then public can access it
+2)User Access to S3 : IAM user (same account)
+-We can IAM permissions on the user.Then user can access the S3 bucket
+3)EC2 instance access - Use IAM Roles
+-we create a EC2 instance role with correct IAM permissions on the instance
+4)Cross Account Access : use bucket policy
+-We create a bucket policy that allows cross account.
+-This way iam user from other account can access our bucket.
 
 
 
