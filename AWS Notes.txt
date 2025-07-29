@@ -358,7 +358,7 @@ This service is implemented by amazon having name as :-
 -Amazon Simple Queue Service (SQS)
 -Amazon Simple Notification Service (SNS)
 
-Amazon Simple Queue Server(SQS) :-
+Amazon Simple Queue Service(SQS) :-
 
 -Amazon SQS can Send,Store,Receive messaged between software components at any volumne.
 -THis is without loosing messages or without needing support of any other services.
