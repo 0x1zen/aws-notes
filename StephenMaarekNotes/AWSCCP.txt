@@ -1257,8 +1257,8 @@ ECS
 
 -The ECS service is smart enough to know which ec2 instance to place the new docker container which you add.
 
-Fargate • Launch Docker containers on
-AWS
+Fargate 
+• Launch Docker containers on AWS
 • You do not provision the infrastructure (no EC2 instances to manage)
 – simpler!
 • Serverless offering 
@@ -1901,6 +1901,880 @@ Internet Gateway & NAT(Network Address Translation) Gateways:-
 • Internet Gateways helps our VPC instances connect with the internet
 • Public Subnets have a route to the internet gateway.
 • NAT Gateways (AWS-managed) & NAT Instances (self-managed) allow your instances in your Private Subnets to access the internet while remaining private
+-Internet gateway is at the VPC level.
+
+Network ACL & Security Groups :-
+
+NACL (Network ACL):-
+
+• A firewall which controls traffic from and to subnet
+• Can have ALLOW and DENY rules
+• Are attached at the Subnet level (Subnet is at AZ level.A AZ can have both public and private subnets).
+• Rules only include IP addresses
+-NACL is only applied to public subnets because these are the internet facing subnets.Private subnets anyways doesnt face internet and is private/ unknown to public.
+
+Security Groups:-
+
+• A firewall that controls traffic to and from an EC2 Instance
+• Can have only ALLOW rules
+• Rules include IP addresses and other security groups
+
+VPC Flow Logs:-
+
+• Capture information about IP traffic going into your interfaces:
+• VPC Flow Logs
+• Subnet Flow Logs
+• Elastic Network Interface Flow Logs
+• Helps to monitor & troubleshoot connectivity issues. Example: 
+• Subnets to internet
+• Subnets to subnets
+• Internet to subnets
+• Captures network information from AWS managed interfaces too: Elastic Load Balancers, ElastiCache, RDS, Aurora, etc… 
+• VPC Flow logs data can go to S3, CloudWatch Logs, and Amazon Data Firehose
+
+VPC Peering :-
+• Connect two VPC, privately using AWS’ network
+• Make them behave as if they were in the same network
+• Must not have overlapping CIDR (IP address range)
+• VPC Peering connection is not transitive (must be established for each VPC that need to communicate with one another)
+
+VPC Endpoints :-
+
+• Endpoints allow you to connect to AWS Services using a private network instead of the public www network
+• This gives you enhanced security and lower latency to access AWS services
+• VPC Endpoint Gateway: S3 & DynamoDB
+• VPC Endpoint Interface: most services (including S3 & DynamoDB)
+
+-Pretty much every service has a Interface endpoint and AWS S3 and DynamoDB has also a gateway endpoint.These endpoints are made to access private subnets using aws's private network.
+
+AWS PrivateLink (VPC Endpoint Services) :-
+
+You have a private office network, and you want to connect to a service (like a file server or a database) without going through the public internet. You want the connection to be secure and private.
+
+That’s exactly what AWS PrivateLink does—but for cloud services.
+
+🔐 What AWS PrivateLink Does
+It allows you to:
+
+Connect privately to AWS services (like S3, EC2) or third-party services.
+Use private IP addresses instead of public ones.
+Avoid exposing your data to the internet.
+🏢 Real-World Analogy
+Think of it like a private tunnel between your office and a trusted partner’s office. You don’t use public roads (internet); you use a dedicated, secure path.
+
+🛠️ How It Works (Simplified)
+A service (like a database or app) is hosted in AWS.
+You want to access it securely from your own AWS environment.
+You create a PrivateLink connection.
+Now, your data travels privately inside AWS—never touching the public internet.
+
+Site to Site VPN & Direct Connect :-
+
+• Site to Site VPN
+• Connect an on-premises VPN to AWS
+• The connection is automatically encrypted
+• Goes over the public internet
+
+• Direct Connect (DX)
+• Establish a physical connection between on-premises and AWS
+• The connection is private, secure and fast
+• Goes over a private network
+• Takes at least a month to establish
+
+Site-to-Site VPN
+• On-premises: must use a Customer Gateway (CGW)
+• AWS: must use a Virtual Private Gateway (VGW)
+
+AWS Client VPN
+• Connect from your computer using OpenVPN to your private network in AWS and on-premises
+• Allow you to connect to your EC2 instances over a private IP (just as if you were in the private VPC network)
+• Goes over public Internet
+
+Transit Gateway :-
+• For having transitive peering between thousands of VPC and on-premises, 
+hub-and-spoke (star) connection
+• One single Gateway to provide this functionality
+• Works with Direct Connect Gateway, VPN connections
+
+-A single gateway for 1000s of VPC and connections
+
+ENI - Elastic Network Interface
+Elastic IP –fixed public IPv4, ongoing cost if not in-use
+
+AWS Shared Responsibility Model :-
+
+• AWS responsibility - Security of the Cloud
+• Protecting infrastructure (hardware, software, facilities, and networking) that runs all the AWS services
+• Managed services like S3, DynamoDB, RDS, etc.
+• Customer responsibility - Security in the Cloud
+• For EC2 instance, customer is responsible for management of the guest OS (including security patches and updates), firewall & network configuration, IAM 
+• Encrypting application data 
+• Shared controls:
+• Patch Management, Configuration Management, Awareness & Training
+
+Example, for RDS
+• AWS responsibility:
+• Manage the underlying EC2 instance, disable SSH access
+• Automated DB patching
+• Automated OS patching
+• Audit the underlying instance and disks & guarantee it functions
+• Your responsibility:
+• Check the ports / IP / security group inbound rules in DB’s SG
+• In-database user creation and permissions
+• Creating a database with or without public access
+• Ensure parameter groups or DB is configured to only allow SSL connections
+• Database encryption setting
+
+Example, for S3 :-
+• AWS responsibility:
+• Guarantee you get unlimited storage 
+• Guarantee you get encryption 
+• Ensure separation of the data between different customers 
+• Ensure AWS employees can’t access your data 
+• Your responsibility: 
+• Bucket configuration 
+• Bucket policy / public setting 
+• IAM user and roles 
+• Enabling encryption
+
+
+DDOS Protection on AWS :-
+• AWS Shield Standard: protects against DDOS attack for your website and applications, for all customers at no additional costs
+• AWS Shield Advanced: 24/7 premium DDoS protection
+• AWS WAF: Filter specific requests based on rules
+• CloudFront and Route 53: 
+• Availability protection using global edge network
+• Combined with AWS Shield, provides attack mitigation at the edge
+• Be ready to scale – leverage AWS Auto Scaling
+
+AWS Shield :-
+
+• AWS Shield Standard:
+• Free service that is activated for every AWS customer
+• Provides protection from attacks such as SYN/UDP Floods, Reflection attacks and other layer 3/layer 4 attacks
+• AWS Shield Advanced: 
+• Optional DDoS mitigation service ($3,000 per month per organization) 
+• Protect against more sophisticated attack on Amazon EC2, Elastic Load Balancing (ELB), Amazon CloudFront, AWS Global Accelerator, and Route 53
+• 24/7 access to AWS DDoS response team (DRP)
+• Protect against higher fees during usage spikes due to DDoS
+
+AWS WAF – Web Application Firewall
+• Protects your web applications from common web exploits (Layer 7)
+• Layer 7 is HTTP (vs Layer 4 is TCP)
+• Deploy on Application Load Balancer, API Gateway, CloudFront
+• Define Web ACL (Web Access Control List):
+• Rules can include IP addresses, HTTP headers, HTTP body, or URI strings
+• Protects from common attack - SQL injection and Cross-Site Scripting (XSS)
+• Size constraints, geo-match (block countries)
+• Rate-based rules (to count occurrences of events) – for DDoS protection
+
+
+
+Q.How do we protect Your VPC overall?
+-Using 
+
+AWS Network Firewall :-
+
+AWS Network Firewall
+• Protect your entire Amazon VPC
+• From Layer 3 to Layer 7 protection 
+• Any direction, you can inspect
+• VPC to VPC traffic
+• Outbound to internet
+• Inbound from internet
+• To / from Direct Connect & Site-to-Site VPN
+
+AWS Firewall Manager
+• Manage security rules in all accounts of an AWS Organization
+• Security policy: common set of security rules
+• VPC Security Groups for EC2, Application Load Balancer, etc…
+• WAF rules
+• AWS Shield Advanced
+• AWS Network Firewall
+• Rules are applied to new resources as they are created (good for 
+compliance) across all and future accounts in your Organization
+
+Penetration Testing on your AWS Cloud
+• Prohibited Activities
+• DNS zone walking via Amazon Route 53 Hosted Zones
+• Denial of Service (DoS), Distributed Denial of Service (DDoS), Simulated DoS, Simulated DDoS
+• Port flooding
+• Protocol flooding
+• Request flooding (login request flooding, API request flooding)
+• For any other simulated events, contact aws-security-simulatedevent@amazon.com
+• Read more: https://aws.amazon.com/security/penetration-testing/
+
+Data at rest vs. Data in transit
+• At rest: data stored or archived on a device
+• On a hard disk, on a RDS instance, in S3 Glacier Deep Archive, etc.
+• In transit (in motion): data being moved from one location to another
+• Transfer from on-premises to AWS, EC2 to DynamoDB, etc.
+• Means data transferred on the network
+• We want to encrypt data in both states to protect it!
+• For this we leverage encryption keys
+
+AWS KMS (Key Management Service)
+• Anytime you hear “encryption” for an AWS service, it’s most likely KMS
+• KMS = AWS manages the encryption keys for us
+
+CloudHSM :-
+
+• KMS => AWS manages the software for encryption
+• CloudHSM => AWS provisions encryption hardware
+• Dedicated Hardware (HSM = Hardware Security Module)
+• You manage your own encryption keys entirely (not AWS)
+• HSM device is tamper resistant
+
+Types of KMS Keys
+• Customer Managed Key:
+• Create, manage and used by the customer, can enable or disable
+• Possibility of rotation policy (new key generated every year, old key preserved)
+• Possibility to bring-your-own-key 
+• AWS Managed Key:
+• Created, managed and used on the customer’s behalf by AWS
+• Used by AWS services (aws/s3, aws/ebs, aws/redshift)
+• AWS Owned Key:
+• Collection of CMKs that an AWS service owns and manages to use in multiple accounts
+• AWS can use those to protect resources in your account (but you can’t view the keys)
+• CloudHSM Keys (custom keystore): 
+• Keys generated from your own CloudHSM hardware device
+• Cryptographic operations are performed within the CloudHSM cluster
+
+AWS Certificate Manager (ACM) 
+• Let’s you easily provision, manage, and deploy 
+SSL/TLS Certificates
+• Used to provide in-flight encryption for websites (HTTPS)
+
+AWS Secrets Manager
+• Newer service, meant for storing secrets
+• Capability to force rotation of secrets every X days
+• Automate generation of secrets on rotation (uses Lambda)
+• Integration with Amazon RDS (MySQL, PostgreSQL, Aurora)
+
+AWS Artifact (not really a service)
+• Portal that provides customers with on-demand access to AWS 
+compliance documentation and AWS agreements
+Can be used to support internal audit or compliance
+
+• Artifact Reports - Allows you to download AWS security and compliance 
+documents from third-party auditors, like AWS ISO certifications, Payment 
+Card Industry (PCI), and System and Organization Control (SOC) reports
+• Artifact Agreements - Allows you to review, accept, and track the status of 
+AWS agreements such as the Business Associate Addendum (BAA) or the 
+Health Insurance Portability and Accountability Act (HIPAA) for an individual 
+account or in your organization
+
+Amazon GuardDuty
+• Intelligent Threat discovery to protect your AWS Account 
+• Uses Machine Learning algorithms, anomaly detection, 3rd party data
+• One click to enable (30 days trial), no need to install software
+• Input data includes:
+• CloudTrail Events Logs – unusual API calls, unauthorized deployments
+• CloudTrail Management Events – create VPC subnet, create trail, …
+• CloudTrail S3 Data Events – get object, list objects, delete object, …
+• VPC Flow Logs – unusual internal traffic, unusual IP address
+• DNS Logs – compromised EC2 instances sending encoded data within DNS queries
+• Optional Features – EKS Audit Logs, RDS & Aurora, EBS, Lambda, S3 Data Events…
+• Can setup EventBridge rules to be notified in case of findings
+• EventBridge rules can target AWS Lambda or SNS
+• Can protect against CryptoCurrency attacks (has a dedicated “finding” for it)
+
+Amazon Inspector
+• Automated Security Assessments 
+• For EC2 instances 
+• Leveraging the AWS System Manager (SSM) agent
+• Analyze against unintended network accessibility
+• Analyze the running OS against known vulnerabilities
+• For Container Images push to Amazon ECR
+• Assessment of Container Images as they are pushed
+• For Lambda Functions
+• Identifies software vulnerabilities in function code and package 
+dependencies
+• Assessment of functions as they are deployed
+• Reporting & integration with AWS Security Hub
+• Send findings to Amazon Event Bridge
+
+What does Amazon Inspector evaluate?
+• Remember: only for EC2 instances, Container Images & Lambda 
+functions
+A risk score is associated with all vulnerabilities for prioritization
+
+
+AWS Config :-
+
+AWS Config
+• Helps with auditing and recording compliance of your AWS resources
+• Helps record configurations and changes over time
+
+-Gives all the information about all the resources created by people from your org are compliant or not.
+
+• View compliance of a resource over time 
+• View configuration of a resource over time 
+• View CloudTrail API calls if enabled
+
+AWS Macie :-
+
+• Amazon Macie is a fully managed data security and data privacy service 
+that uses machine learning and pattern matching to discover and protect your sensitive data in AWS.
+• Macie helps identify and alert you to sensitive data, such as personally
+
+
+AWS Security Hub
+• Central security tool to manage security across several AWS accounts and automate 
+security checks
+• Integrated dashboards showing current security and compliance status to quickly take 
+actions
+• Automatically aggregates alerts in predefined or personal findings formats from various 
+AWS services & AWS partner tools: 
+• Config
+• GuardDuty
+• Inspector
+• Macie
+• IAM Access Analyzer
+• AWS Systems Manager
+• AWS Firewall Manager
+• AWS Health
+• AWS Partner Network Solutions
+• Must first enable the AWS Config Service
+
+Amazon Detective
+• GuardDuty, Macie, and Security Hub are used to identify potential 
+security issues, or findings
+• Sometimes security findings require deeper analysis to isolate the root 
+cause and take action – it’s a complex process
+• Amazon Detective analyzes, investigates, and quickly identifies the 
+root cause of security issues or suspicious activities (using ML and graphs)
+• Automatically collects and processes events from VPC Flow Logs, 
+CloudTrail, GuardDuty and create a unified view
+• Produces visualizations with details and context to get to the root cause
+
+AWS Abuse
+• Report suspected AWS resources used for abusive or illegal purposes
+• Abusive & prohibited behaviors are: 
+• Spam – receving undesired emails from AWS-owned IP address, websites & forums 
+spammed by AWS resources
+• Port scanning – sending packets to your ports to discover the unsecured ones
+• DoS or DDoS attacks – AWS-owned IP addresses attempting to overwhlem or crash your servers/softwares
+• Intrusion attempts – logging in on your resources
+• Hosting objectionable or copyrighted content – distributing illegal or copyrighted content without consent
+• Distributing malware – AWS resources distributing softwares to harm computers or machines
+• Contact the AWS Abuse team: AWS abuse form, or abuse@amazonaws.com
+
+Root user privileges
+• Root user = Account Owner (created when the account is created)
+• Has complete access to all AWS services and resources
+• Lock away your AWS account root user access keys!
+• Do not use the root account for everyday tasks, even administrative tasks
+• Actions that can be performed only by the root user:
+• Change account settings (account name, email address, root user password, root user access keys)
+• View certain tax invoices
+• Close your AWS account
+• Restore IAM user permissions
+• Change or cancel your AWS Support plan
+• Register as a seller in the Reserved Instance Marketplace
+• Configure an Amazon S3 bucket to enable MFA
+• Edit or delete an Amazon S3 bucket policy that includes an invalid VPC ID or VPC endpoint ID
+• Sign up for GovCloud
+
+AWS Access Analyzer :-
+
+-is a security and visibility tool that helps you identify and monitor resources in your AWS account that are shared externally — either with other AWS accounts, services, or the public internet.
+
+Q.According to the Shared Responsibility Model, who is responsible for firewall and network configuration for EC2 Instances?
+->Customer
+
+Q.A company would like to protect its web applications from common web exploits that may affect availability, compromise security, or consume excessive resources. Which AWS service should they use?
+->Web application firewall(WAF)
+
+Q.You want to record configurations and changes over time. Which service allows you to do this?
+-AWS Config
+
+Q.According to the Shared Responsibility Model, who is responsible for Patch Management?
+AWS is responsible for patching and fixing flaws within the infrastructure , but customers are responsible for patching their guest OS and applications.Shared controls also includes configuration management , awareness and training.
+
+Question 13:
+A company would like to automate security on EC2 instances to assess security and vulnerabilities in these instances. Which AWS service should it use?
+
+Amazon Rekognition
+• Find objects, people, text, scenes in images and videos using ML
+• Facial analysis and facial search to do user verification, people counting
+• Create a database of “familiar faces” or compare against celebrities
+• Use cases:
+• Labeling
+• Content Moderation
+• Text Detection
+• Face Detection and Analysis (gender, age range, emotions…)
+• Face Search and Verification
+• Celebrity Recognition
+• Pathing (ex: for sports game analysis)
+
+Amazon Transcribe
+• Automatically convert speech to text
+• Uses a deep learning process called automatic speech recognition (ASR) to convert speech to text quickly and accurately
+• Automatically remove Personally Identifiable Information (PII) using Redaction
+• Supports Automatic Language Identification for multi-lingual audio
+
+Amazon Polly 
+• Turn text into lifelike speech using deep learning 
+• Allowing you to create applications that talk
+
+Amazon Translate
+• Natural and accurate language translation
+• Amazon Translate allows you to localize content - such as websites and
+applications - for international users, and to easily translate large
+volumes of text efficiently.
+
+Amazon Lex & Connect
+• Amazon Lex: (same technology that powers Alexa)
+• Automatic Speech Recognition (ASR) to convert speech to text
+• Natural Language Understanding to recognize the intent of text, callers
+• Helps build chatbots, call center bots
+• Amazon Connect:
+• Receive calls, create contact flows, cloud-based virtual contact center
+
+Amazon Comprehend
+• For Natural Language Processing – NLP
+• Fully managed and serverless service
+• Uses machine learning to find insights and relationships in text
+
+Amazon SageMaker
+• Fully managed service for developers / data scientists to build ML models
+• Typically, difficult to do all the processes in one place + provision servers
+• Machine learning process (simplified): predicting your exam score
+
+Amazon SageMaker
+• Fully managed service for developers / data scientists to build ML models
+• Typically, difficult to do all the processes in one place + provision servers
+• Machine learning process (simplified): predicting your exam score
+
+
+Amazon Kendra
+• Fully managed document search service powered by Machine Learning
+• Extract answers from within a document (text, pdf, HTML, PowerPoint, MS Word, FAQs…)
+• Natural language search capabilities
+
+Amazon Personalize
+• Fully managed ML-service to build apps with real-time personalized recommendations
+• Example: personalized product recommendations/re-ranking, customized direct marketing
+• Example: User bought gardening tools, provide recommendations on the next one to buy
+• Same technology used by Amazon.com
+• Integrates into existing websites, applications, SMS, email marketing systems, …
+
+Amazon Textract
+• Automatically extracts text, handwriting, and data from any scanned
+documents using AI and ML
+
+Q.A research team would like to group articles by topics using Natural Language Processing (NLP). Which service should they use?
+
+->AWS Comprehend
+
+Q.Which AWS service makes it easy to convert speech-to-text?
+->Transcribe
+
+Q.Which of the following services is a document search service powered by machine learning?
+->Kendra
+
+AWS Organizations
+• Global service
+• Allows to manage multiple AWS accounts
+• The main account is the master account
+• Cost Benefits:
+• Consolidated Billing across all accounts - single payment method
+• Pricing benefits from aggregated usage (volume discount for EC2, S3…)
+• Pooling of Reserved EC2 instances for optimal savings
+• API is available to automate AWS account creation
+• Restrict account privileges using Service Control Policies (SCP)
+
+Multi Account Strategies
+• Create accounts per department, per cost center, per dev / test /
+prod, based on regulatory restrictions (using SCP), for better
+resource isolation (ex: VPC), to have separate per-account
+service limits, isolated account for logging
+
+Organizational Units (OU) - Examples :-
+
+-In this we have a single master Account which can have multiple organizational units .
+-Like a master account will have dev OU , Test OU, Production OU
+
+Service Control Policies (SCP)
+• Whitelist or blacklist IAM actions
+• Applied at the OU or Account level
+• Does not apply to the Master Account
+• SCP is applied to all the Users and Roles of the Account, including Root user
+• The SCP does not affect service-linked roles
+• Service-linked roles enable other AWS services to integrate with AWS Organizations
+and can't be restricted by SCPs.
+• SCP must have an explicit Allow (does not allow anything by default)
+• Use cases:
+• Restrict access to certain services (for example: can’t use EMR)
+• Enforce PCI compliance by explicitly disabling services
+
+AWS Organization – Consolidated Billing
+• When enabled, provides you with:
+• Combined Usage – combine the usage across all AWS accounts in the AWS Organization to
+share the volume pricing, Reserved Instances and Savings Plans discounts
+• One Bill – get one bill for all AWS Accounts in the AWS Organization
+• The management account can turn off Reserved Instances discount sharing for any
+account in the AWS Organization, including itself
+
+You purchase:
+
+    🎟️ 1 Reserved Instance for t3.medium in Account A
+
+Now:
+
+    If Account B or Account C uses a t3.medium instance that matches the RI attributes (region, AZ, tenancy, etc.):
+
+        The RI discount is automatically applied to that account’s usage.
+
+        No need to reserve separately in each account.
+
+AWS Control Tower
+• Easy way to set up and govern a secure and compliant multi-account
+AWS environment based on best practices
+
+Benefits:
+• Automate the set up of your environment in a few clicks
+• Automate ongoing policy management using guardrails
+• Detect policy violations and remediate them
+• Monitor compliance through an interactive dashboard
+• AWS Control Tower runs on top of AWS Organizations:
+• It automatically sets up AWS Organizations to organize accounts and implement
+SCPs (Service Control Policies)
+
+AWS Control Tower is a governance and automation tool that helps you set up and manage a secure, multi-account AWS environment based on best practices.
+
+AWS Resource Access Manager (AWS RAM) :-
+
+• Share AWS resources that you own with other AWS accounts
+• Share with any account or within your Organization
+• Avoid resource duplication!
+• Supported resources include Aurora, VPC Subnets, Transit Gateway, Route 53, EC2 Dedicated Hosts,License Manager Configurations…
+
+
+AWS Service Catalog
+• Users that are new to AWS have too many options, and may create
+stacks that are not compliant / in line with the rest of the organization
+• Some users just want a quick self-service portal to launch a set of
+authorized products pre-defined by admins
+• Includes: virtual machines, databases, storage options, etc…
+
+Pricing Models in AWS
+• AWS has 4 pricing models:
+• Pay as you go: pay for what you use, remain agile, responsive, meet scale
+demands
+• Save when you reserve: minimize risks, predictably manage budgets,
+comply with long-terms requirements
+• Reservations are available for EC2 Reserved Instances, DynamoDB Reserved
+Capacity, ElastiCache Reserved Nodes, RDS Reserved Instance, Redshift Reserved
+Nodes
+• Pay less by using more: volume-based discounts
+• Pay less as AWS grows
+
+Compute Pricing EC2 :-
+
+• On demand instances:
+• Minimum of 60s • Pay per second (Linux/Windows) or per hour (other)
+• Reserved instances: • Up to 75% discount compared to On demand on hourly rate
+-1 or 3 years commitment
+• All upfront, partial upfront, no upfront
+
+• Spot instances:
+• Up to 90% discount compared to On demand on hourly rate
+-Bid for unused capacity 
+
+• Dedicated Host:
+• On-demand 
+• Reservation for 1 year or 3 years commitment 
+
+• Savings plans as an alternative to save on sustained usage
+
+AWS Lambda :-
+    Pay for:
+    ✅ Each invocation
+    ✅ Execution duration
+
+    No server management
+
+    Best for: Small, event-driven tasks
+
+🐳 ECS (EC2 Launch Type)
+
+    ECS is free
+
+    Pay for:
+    ✅ EC2 instances
+    ✅ Other AWS resources (e.g., ALB, EBS)
+
+    You manage EC2s
+
+    Best for: Cost-saving if EC2 is well utilized
+
+🧱 ECS (Fargate Launch Type)
+
+    Pay for:
+    ✅ vCPU + Memory per container
+    ✅ Task duration
+
+    No EC2 to manage
+
+    Best for: Simple container apps without infra management
+
+Storage Pricing - EBS :-
+• Volume type (based on performance) 
+• Storage volume in GB per month provisionned 
+• IOPS: • General Purpose SSD: Included 
+• Provisioned IOPS SSD: Provisionned amount in IOPS 
+• Magnetic: Number of requests 
+• Snapshots: 
+• Added data cost per GB per month 
+• Data transfer: 
+• Outbound data transfer are tiered for volume discounts 
+• Inbound is free
+
+Database Pricing - RDS
+• Per hour billing
+• Database characteristics:
+• Engine
+• Size
+• Memory class
+• Purchase type:
+• On-demand
+• Reserved instances (1 or 3 years) with optional up-front
+• Backup Storage: There is no additional charge for backup storage up to
+100% of your total database storage for a region.
+
+• Additional storage (per GB per month) • Number of input and output requests per month • Deployment type (storage and I/O are variable): • Single AZ • Multiple AZs • Data transfer: • Outbound data transfer are tiered for volume discounts • Inbound is free
+
+Content Delivery
+– CloudFront
+• Pricing is different across different geographic regions • Aggregated for each edge location, then applied to your bill • Data Transfer Out (volume discount) • Number of HTTP/HTTPS requests
+
+AWS Networking Costs :-
+
+• Use Private IP instead of Public IP for good savings and better network performance
+• Use same AZ for maximum savings (at the cost of high availability)
+
+🧩 Two Types of Savings Plans
+-Commit a certain dollar amount for every hour for 1 or 3 years
+1. 🖥️ EC2 Instance Savings Plan
+
+    ✅ Up to 72% discount
+
+    You commit to a specific instance family in a specific region
+    Example: m5 in us-east-1
+
+    Flexibility within that family:
+
+        Any size: m5.large, m5.4xlarge
+
+        Any OS: Linux, Windows
+
+        Any Availability Zone (AZ) or Tenancy (Shared/Dedicated)
+
+📌 Cheaper than Compute Plan, but less flexible
+2. ⚙️ Compute Savings Plan
+
+    ✅ Up to 66% discount
+
+    Most flexible option:
+
+        Any instance family
+
+        Any region
+
+        Any size, OS, tenancy
+
+        Also applies to Fargate and Lambda
+
+📌 Great if you use multiple services, move between regions, or want maximum freedom
+
+AWS Compute Optimizer • Reduce costs and improve performance by recommending optimal AWS resources for your
+workloads
+• Helps you choose optimal configurations and right
+- size your workloads (over/under provisioned)
+• Uses Machine Learning to analyze your resources’
+configurations and their utilization CloudWatch
+metrics
+
+Billing and Costing Tools :-
+• Estimating costs in the cloud: 
+• Pricing Calculator 
+• Tracking costs in the cloud: 
+• Billing Dashboard 
+• Cost Allocation Tags 
+• Cost and Usage Reports 
+• Cost Explorer 
+• Monitoring against costs plans: 
+• Billing Alarms 
+• Budgets
+
+Cost Allocation Tags
+• Use cost allocation tags to track your AWS costs on a detailed level
+• AWS generated tags
+• Automatically applied to the resource you create
+• Starts with Prefix aws: (e.g. aws: createdBy)
+• User-defined tags
+• Defined by the user
+• Starts with Prefix user: 
+
+Tags can be used to create Resource Groups
+• Create, maintain, and view a collection of resources that share common tags
+• Manage these tags using the Tag Editor
+
+-Tags are used for organizing resources
+
+Cost and Usage Reports
+• Dive deeper into your AWS costs and usage
+• The AWS Cost & Usage Report contains the most comprehensive set of AWS cost and usage data available, including additional metadata
+about AWS services, pricing, and reservations (e.g., Amazon EC2 Reserved Instances (RIs)).
+
+Cost Explorer
+• Visualize, understand, and manage your AWS costs and usage over time
+• Create custom reports that analyze cost and usage data.
+• Analyze your data at a high level: total costs and usage across all accounts
+• Or Monthly, hourly, resource level granularity
+• Choose an optimal Savings Plan (to lower prices on your bill)
+• Forecast usage up to 12 months based on previous usage
+
+- a visual explorer used to forecast your usage.
+
+Billing Alarms in CloudWatch:-
+
+• Billing data metric is stored in CloudWatch us-east1
+• Billing data are for overall worldwide AWS costs
+
+AWS Budgets
+• Create budget and send alarms when costs exceeds the budget
+• 4 types of budgets: Usage, Cost, Reservation, Savings Plans
+• For Reserved Instances (RI)
+• Track utilization
+• Supports EC2, ElastiCache, RDS, Redshift
+• Up to 5 SNS notifications per budget
+• Can filter by: Service, Linked Account, Tag, Purchase Option, Instance
+Type, Region, Availability Zone, API Operation, etc…
+• Same options as AWS Cost Explorer!
+• 2 budgets are free, then $0.02/day/budget
+
+AWS Cost Anomaly Detection
+• Continuously monitor your cost and usage using ML to detect unusual spends
+• It learns your unique, historic spend patterns to detect one-time cost spike and/or
+continuous cost increases (you don’t need to define thresholds)
+• Monitor AWS services, member accounts, cost allocation tags, or cost categories
+• Sends you the anomaly detection report with root-cause analysis
+• Get notified with individual alerts or daily/weekly summary (using SNS)
+
+AWS Service Quotas
+• Notify you when you’re close to a service quota value threshold
+• Create CloudWatch Alarms on the Service Quotas console
+• Example: Lambda concurrent executions
+
+Trusted Advisor • No need to install anything
+– high level AWS account assessment
+• Analyze your AWS accounts and provides
+recommendation on 6 categories: • Cost optimization • Performance • Security • Fault tolerance • Service limits • Operational Excellence
+• Business & Enterprise Support plan • Full Set of Checks • Programmatic Access using AWS Support API
+
+AWS Support plans :-
+
+1)Basic Support Plan : 
+
+Customer Service & Communities - 24x7 access to customer service,
+documentation, whitepapers, and support forums.
+• AWS Trusted Advisor - Access to the 7 core Trusted Advisor checks
+and guidance to provision your resources following best practices to
+increase performance and improve security.
+• AWS Personal Health Dashboard - A personalized view of the health
+of AWS services, and alerts when your resources are impacted
+
+AWS Developer Support Plan:-
+• All Basic Support Plan + • Business hours email access to Cloud Support Associates • Unlimited cases / unlimited contacts • Case severity / response times: • General guidance: < 24 business hours • System impaired: < 12 business hours
+
+AWS Business Support Plan (24/7)
+• Intended to be used if you have production workloads
+• Trusted Advisor – Full set of checks + API access
+• 24x7 phone, email, and chat access to Cloud Support Engineers
+• Unlimited cases / unlimited contacts
+• Access to Infrastructure Event Management for additional fee.
+• Case severity / response times:
+• General guidance: < 24 business hours
+• System impaired: < 12 business hours
+• Production system impaired: < 4 hours
+• Production system down: < 1 hour
+
+AWS Enterprise On-Ramp Support Plan (24/7)
+• Intended to be used if you have production or business critical workloads
+• All of Business Support Plan +
+• Access to a pool of Technical Account Managers (TAM)
+• Concierge Support Team (for billing and account best practices)
+• Infrastructure Event Management, Well-Architected & Operations Reviews
+• Case severity / response times:
+• …
+• Production system impaired: < 4 hours
+• Production system down: < 1 hour
+• Business-critical system down: < 30 minutes
+
+AWS Enterprise Support Plan (24/7)
+• Intended to be used if you have mission critical workloads
+• All of Business Support Plan +
+• Access to a designated Technical Account Manager (TAM)
+• Concierge Support Team (for billing and account best practices)
+• Infrastructure Event Management, Well-Architected & Operations Reviews
+• Access to AWS Incident Detection and Response (for an additional fee)
+• Business-critical system down: < 15 minutes
+
+Q.Which services are free to use in AWS?
+->VPC,IAM,Consolidated Billing and elastic beanstalk
+
+Q.CloudFront pricing is the same in every geographic region.
+->DIffers accross every geographic region
+
+q.When you reserve, the larger the upfront payment, the smaller the discount.
+->Larger the upfront payment , bigger the discount
+
+Q.EBS Snapshots are added cost in GB per month?
+->True.The added data storage by EBS snapshots are added cost in GB per month to EBS pricing.
+
+Question 8:
+Which pricing model allows you to minimize risks, predictably manage budgets, and comply with long-term requirements, and is available for EC2, DynamoDB, ElastiCache, RDS, and Redshift?
+->Save when you reserve
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
