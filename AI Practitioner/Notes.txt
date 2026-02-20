@@ -1,0 +1,43 @@
+What is artificial intelligence ? 
+-Artificial intelligence is a field of computer science dedicated to solving problems that we 
+commonly associate with human intelligence.
+for eg.Image creation , image recognition , speech-to-text
+
+How does AI work ?
+-There is a training data set.Which is taken by a data scientist generally to train the AI model.
+-Training AI model is some code that has some statistical abilities and a AI model is born out
+of it.
+For eg. A data scientist takes a data set like fruits.Places them on AI graph grouping similar
+kind of fruits together.Placing group of apples at one place in a graph , placing group of bananas in another place in graph and training the AI model on it.
+-We as a User of this AI model , when we give a new image of apple , which was never seen by AI before , the AI , based on the data it was trained should be able to recognize that the user provided image is of a Apple.
+
+History of AI :-
+1)In 1950s this was the birth of AI.Alan Turing , who is a mathamatician  , proposes something called as turing test.
+-The Turing test proposes that , the machine has intelligence if its able to have a conversation with a human , and fool the human making it think that the human is speaking to another human.
+-So if the computer can pretend its a human and a human cannot detect this , then we have achieved artifical intelligence.
+-John Mccarthy , who is also one of the father of artificial intelligence , who just invented the term.
+2)In 1970s , we have whats called expert systems.Expert systems are like the mycin expert systems
+which is an AI rule based system to detect bacterias.
+-It was one of the first AI , which would say you have this bacteria and then we propose some kind of treatments.
+3)In 1990s , we have the new field of machine learning and data mining.In this we can collect data , organize it , and we start to have statistical breakthroughs in math that allows us to design algorithms to start doing machine learning.
+4)In 1997 , Deep Blue was introduced by IBM.IBM's deep blue defeats world chess champion Garry Kasparov.
+-It does it by doing a lot of computations , analyzing the best moves and playing.
+5)In 2010s , we have the Deep learning revolution.This is where we have neural networks , and the type of algorithms that we see in modern AI.
+-And so , in 2016 , there is google which creates a algorithm and AI named alphaGo , defeating the Go world champion , Lee Sedol in 2016.
+6)In 2020s , we have AI in everyday life like virtual assistants , autonomous vehicles and healthcare diagnostics.
+
+AI Use Cases :-
+1)Transcribe and transalte spoken language.
+2)Playing humans in games(chess , go , starcraft etc).
+3)Speech recognition and generation
+4)Driving cars , flying airplanes
+5)Suggest code for developers(copilot).
+6)Automating business processes
+7)Fraud detection
+
+AI Practical Example :-
+Intelligent document processing
+-Say we have a invoice  , and we need to extract the information out of invoice and insert it into our system.
+-Here we can leverage AI which is specialized in Intelligent document processing.
+-There are many sub AI techniques leveraged here like computer vision , deep learning , natural language processing.
+
