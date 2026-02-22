@@ -41,3 +41,43 @@ Intelligent document processing
 -Here we can leverage AI which is specialized in Intelligent document processing.
 -There are many sub AI techniques leveraged here like computer vision , deep learning , natural language processing.
 
+Cloud Computing :-
+-Cloud computing is on demand delivery of IT resources like compute power, database storage, applications over the internet.
+-Through a cloud service platform with pay-as-you go pricing.
+
+Five characteristics of cloud computing :-
+1)On-demnad self service :-
+-Users can provision resources and use them without human interaction from the service provider.
+2)Broad network access :-
+-Resources available over the network , and can be accessed by diverse client platforms.
+3)Multi-tenancy and resource pooling :-
+-Multiple customers can share the same infrastructure and applications with securtiy and privacy
+4)Rapid elasticity and scalability:-
+-Automatically and quickly acquire and dispose resources when needed.
+-Quickly and easily scale based on demand
+5)Measured service :-
+-Usage is measured and users pay exactly for what they have used.
+
+Six advantages of cloud computing :-
+1)Trade capital expense(CAPEX) for operational expense(OPEX). i.e CAPEX for OPEX
+-Pay on demand and dont own hardware
+-Reduced total cost of ownserhsip(TCO) and operational expense(OPEX).
+2)Benefit from massive economies of scale
+-Prices are reduced as AWS is more efficient due to large scale.
+3)Stop guessing capacity
+-Scale based on actual measured usage
+4)Increased speed and agility
+5)Stop spending money running and maintaining data centers
+6)Go global in minutes:Leverage the AWS global infrastructure
+
+Types of cloud computing :-
+1)Infrastructure as a service (Iaas) :-
+-Provide building blocks for cloud IT
+-Provides networking , computers data storage space
+-Highest level of flexibility
+-Easy parallel with traditional on prem IT  
+2)Platform as a service(Paas) :-
+-Removes the need for organization to manage the underlying infrastructure
+-Focus on deployment and management of your applications
+3)Software as a service(Saas):-
+-Completed product that is run and managed by the service provider
