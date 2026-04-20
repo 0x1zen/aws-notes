@@ -80,4 +80,110 @@ Types of cloud computing :-
 -Removes the need for organization to manage the underlying infrastructure
 -Focus on deployment and management of your applications
 3)Software as a service(Saas):-
--Completed product that is run and managed by the service provider
+-Completed product that is run and managed by the service provider  .
+
+AWS Regions :-
+-A region is a cluster of data centers
+
+How to choose a AWS region :-
+1)Compliance - country related rules
+2)Latency
+3)Available services (Availablity of a service is subject to the region)
+4)Pricing varies fromregion to region
+
+AWS Availability zones (AZs) :-
+-Each region has many availablity zones.Usually 3 , max is 6
+-Each availablity zone is one or more data centers with redundant power , networking and connectivity.
+-Isolated from Disasters
+
+Shared responsibility model :-
+
+Customer - responsible of the security in the cloud
+AWS - responsible for security of the cloud
+
+WHich service has a global scope ?
+1)AWS Lambda
+2)Rekognition
+3)EC2
+4)IAM
+
+->IAM
+
+What is generative AI ?
+-Generative AI is a subset of Deep learning
+-Used to generate new data thats is similar to the data it is trained on
+1)Tetxt
+2)Image
+3)Audio
+4)Video
+5)Code etc..
+
+We usually interact with LLM by giving it a prompt
+-Then , the model  will leverage all the existing content it has learned from to generate new
+content.
+
+Note :-
+1)Non-deterministic :-
+The generated reponse might be different for different users for the same prompt
+
+WHy non-deterministic ?
+-Lets say we have a sentence "It rained and the roads are ____"
+-Based on the probability LLM will try to put a word.
+For example "wet" = 50% probability
+"flooded" = 50 % probability
+-This conecpt is same as 1 question can have multiple answers and can be rephrased into multiple definitions
+-Every word senetnce is assoaciated with probabilities
+
+Generative AI for Images From text :-
+1)Forward diffusion process (TRaining phase) :-
+-A image is converted step by step from a clear image to a noised image to completed noised
+image
+2)Reverse diffusion proccess (Generation phase):-
+-Used to generate a picture out of noise based on given text prompt
+-Denoises a noised image to make it look like a cat.
+
+Amazon Bedrock :-
+-Build generative AI applications on AWS
+-Fully managed service , no servers for you to manage.
+-Keep control of your data to train the model
+-Pay per use pricing model
+-Unified API's (A single, common API interface to access multiple different foundation models from different providers)
+-Leverage a wide array of foundation models
+-Out of the box features :- RAG , LLM models
+
+AMazon Bedrock - Foundation Models :-
+-AMazon bedrock makes a copy of the FM , available only to you , which you can further fine tune with your own data
+-None of your data is used to train the FM
+
+Knowledge Bases (RAG) :- Fetch data from external data sources.We use RAG for more accurate and relevant responses.
+
+Fine Tuning :- Update the model with your data (From S3)
+
+How to choose a model ?
+
+-Model types , performance capabilities , constraints , compliance
+-Level of customization , model size , inference options , licensing agreements,context windows , latency
+-Multimodal models(Varied type of inputs and outputs)
+
+What's Amazon Titan ?
+-High performance foundation model from AWS
+-Image , text , multimodal model choices from unified API
+-Can be customized with your data
+-Smaller models are more cost effective
+
+Customization techniques for custom models :-
+
+1)Reinforcement fine tuning :-
+Build more accurate models using reward based learning with less manual effort .Idea for
+complex multi step reasoning tasks.
+2)Supervised fine tuning :- 
+Adapts pre trained models to specific tasks using labeled data to improve performance in
+specific domains
+3)Distillation :- Created smaller but fater models by using a large teacher model to train 
+a specialized student model with your invocation logs are generated training data
+
+Amazon bedrock - Fine tuning a model :-
+
+
+
+
