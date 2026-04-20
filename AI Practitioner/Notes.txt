@@ -183,6 +183,62 @@ specific domains
 a specialized student model with your invocation logs are generated training data
 
 Amazon bedrock - Fine tuning a model :-
+-Adapt a copy of FM with your own data
+-Fine-tuning will change the weights of the base FM
+-Tranining data must
+1)Adhere to specific format
+2)Be stored in AMazon S3
+Note : Not all models can be fine tuned
+
+Supervised Fine Tuning :-
+-Improves the performance of a model on specific tasks
+-For eg. You further trained a model on a particular field or area of knowledge
+-Supervised fine-tuning uses labeled examples that are input-output pairs
+
+Reinforcement fine tuning :-
+-Improves your FM using feedback-based(reward) learning
+-Your provide a input data (training data - prompts)
+-You define a reward function to evaluate reponses and judge which responses are good
+For example :-
+Objective tasks (eg. math calcs) => use AWS Lambda
+Subjective tasks (human like) => use another model to judge by providing evaluation instructions
+
+Model learns iteratively from reward function output scores and will try to achieve high scores over time
+
+Example :-
+Technical customer support chatbot (Subjective)
+Sample customer prompt :- my app is running slowly
+
+Judge model :- show empathy , and run diagnostic with user
+
+reponse 1 ) "Restart the app"
+Score - 5.0 
+
+response 2) "That sounds frustrating , I can help you figure that out.Before we troubleshoot , can you tell me when it started and what your were doing at the time".
+
+Score - 9.0
+
+response 3) "Please open a support ticket"
+
+score 2.0
+
+Distillation :-
+Making models smaller and faster
+-Upto 75% less expensive that original models
+-User interations from larger models are taken as input and output and a smaller model is trained
+
+Fine tuning - good to know :-
+
+-Re-training a FM requires a higher budget
+-SUpervised fine tuning is usually cheaper as computations are cheaper and less data is required
+-It requires ML engineers to perform the task
+-RUnning a fine tune model is more expensive :-
+1)Use the customer model (On-demand) "price per token"
+2)Use provisioned throughput (billed per month)
+
+
+
+
 
 
 
