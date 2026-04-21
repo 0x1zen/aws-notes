@@ -236,7 +236,63 @@ Fine tuning - good to know :-
 1)Use the customer model (On-demand) "price per token"
 2)Use provisioned throughput (billed per month)
 
+Amazon Bedrock - Evaluating a model :-
 
+A)Automatic evaluation
+-Evaluate a model for quality control
+-Built in task types :-
+1)Text summarization
+2)QUestion and answer
+3)Text classification
+4)Open ended text generation
+
+-Build your own prompt data set or use built in curated prompt data sets
+-Scores are calculated automatically
+
+For avaluating a model , we take a becnhmark question set and a benchmark answer set , and generate reponses for questions from the gen ai model and compare the benchmark answers with gen ai responses with a judge model , which will give scores
+
+**Model scores are calculated using various statistical methods
+(eg.BERTscore , FI)
+
+B)Human Evaluation :-
+-Choose a work team to evaluate
+-Define metrics on how to evaluate
+-AWS can provide their team or you get your own team
+
+Automated Metrics to evaluate FM :-
+1)ROGUE :- Recall oriented understudy for gisting evaluation
+-Evaluates automatic summarization and machine translation systems
+
+-ROUGUE-N :-measure the number of matching N-grams(1 gram = 1 word) between reference and generated text
+-So basically matches number of words from reference text (benchmark answer you expect)
+and generated text
+
+ROUGE-L :-longest common subsequence between reference and generated text
+
+2)BLEU : Billingual Evaluation Understudy
+-Evaluate the quality of generated text , especially translations
+-Considers both precision and penalizes too much brevity
+-Looks at combination of N-grams (1,2,3,4)
+
+3)BERTscore :-
+-EValuates based on semantic similarity between generated texts
+-Semantic similarity means compares actual meaning of the generated text
+-Uses pretrained BERT models (Bidirectional Encoder Representations from Transformers)
+to compare the contextualized embeddings of both texts and computes the cosine similarity between them.
+
+4)Perplexity :- How well the model predicts the next token (lower is better)
+
+Business metrics to evaluate a model on :-
+1)User Satisfaction :-
+-User feedbacks are assessed against model reponses
+2)ARPU (Average revenue per user)
+3)Cross domain performance :-measure the ability of model to perform accross different domains
+4)Conversation rate
+5)Efficiency :- Evaluate models efficiency in terms of computation , resource utilization etc
+
+AMazon Bedrock - RAG and knowledge base :-
+
+1)Retrieval Augmented Generation (RAG):-
 
 
 
