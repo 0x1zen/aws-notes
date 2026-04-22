@@ -293,6 +293,61 @@ Business metrics to evaluate a model on :-
 AMazon Bedrock - RAG and knowledge base :-
 
 1)Retrieval Augmented Generation (RAG):-
+-ALlows a foundation model to reference a data source outside of its training data
+For example : If we give a prompt to GenAI model as , WHo does John report to ? 
+It will go and seacrh in your RAG(Knoeledge base) , and retrive data from there.
+-RAG is backed by a vector database.
+-The Data source for your RAG will be Amazon S3
+-Bedrock takes care of creating vector embeddings in the database of your choice based on your data
+-Use where real - time data is needed to fed in your foundation model
+
+RAG Vector databases by AWS :-
+1)Amazon opensearch service (Serverless managed cluster) :-
+-Search and analytics database realtime similarity queries , store millions of vector embeddings , scalabale index management , and fast nearest neighbour (kNN) seacrh capability.
+2)Amazon AUrora PostgreSQL 
+3)Amazon Neptune analytics :- graph database that enables high performance graph analytics and graph based RAG (graphRAG) solutions.
+4)Amazon S3 Vectors :-
+
+Amazon Bedrock - RAG data sources :-
+1)AMazon S3
+2)Comflunce
+3)Microsoft sharepoint
+4)Web Pages
+5)Salesforce
+
+Amazon Bedrock RAG use cases :-
+1)Customer Service Chatbot :-
+2)Legal research and analysis
+3)Healthcare Question answering
+
+GenAI concepts - Tokenization :-
+1)Tokenization : Converting raw text into a sequence of tokens
+Types of tokenization :-
+A)Word Based Tokenization :-
+-text split into individual words
+-Subword tokenization : Some long words can be split too
+
+GenAI concepts - Context Window :-
+-The number of tokens a LLM can consider while generating text
+-The larger the context window , the more information and coherence
+-Larger the context window , more money is required as more tokens are utilized
+-First factor to look at when considering a model
+
+GenAI concepts - Embeddings :-
+-Create vectors (array of numerical values) out of text , images or audio
+-Vectors have a high dimensionality to capture many features for one input , such as semantic (meaning) , syntactic role (grammar) , sentiment (emotional tone)
+-Embeddings models can power search applications
+
+Amazon Bedrock - GaurdRails :-
+-Control the intercation between users and foundation models (FMs)
+-Filter underiable and harmful content
+-Remove personally identifiable information
+-Enahnced privacy
+-Reduce hallucinations
+
+-We can add our denied topic , word filters , sensitive information filters (Personally identifiable information) 
+-We can apply many gaurdrails as we want
+
 
 
 
