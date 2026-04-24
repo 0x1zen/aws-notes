@@ -348,6 +348,169 @@ Amazon Bedrock - GaurdRails :-
 -We can add our denied topic , word filters , sensitive information filters (Personally identifiable information) 
 -We can apply many gaurdrails as we want
 
+Amazon Bedrock Agents :-
+
+-Manage and carry out various multi-step tasks related to infrastructure provisioning , -application deployment , and operational activities.
+-Task coordination : perform tasks in correct order and make sure information is passed correctly between tasks
+-Agents are configured to perform specific pre-defined action groups 
+-Integrate with other systems to exhcnage data or initiate actions
+-Leverage RAG to retrive information whenever necessary
+
+Amazon bedrock and cloudwatch integration :-
+
+1)Model invocation logging :-
+-Send logs of all invocations to Amazon cloudwatch and S3
+-Can include texts , images and embeddings
+-Analyze furtheer and build alerting 
+
+2)Cloudwatch metrics :-
+-Published metric from bedrock to clodwatch
+-Including ContentFilteredCount , which helps to see if gaurdrails are functioning
+-Can build cloudwatch alarms on top of metrics
+
+Amazon Bedrock Pricing :-
+1)On-demand
+-Pay as you go
+-Text models - charged for every input output tokens processed
+-EMbeddings models - charged for every input output tokens processed
+-Image models - Charged for every image generated 
+-WOrks with base models only
+
+2)Batch :
+-Multiple predictions at a time (output is a single file in amazon S3)
+-Can provide discounts of upto 50%
+Submit many prompts at once (as a JSONL file in Amazon S3)
+Get results asynchronously (written back to S3)
+Trade latency for lower cost
+
+-Its meant for non realtime workloads
+
+3)Provisioned throughput 
+-Purchase model units for a certain time
+-Thoughput - max number of input output tokens processed per minute
+-Works with base , fine tuned and custom models
+
+Model improvement techniques cost order :-
+1)Prompt engineering :-
+-No model training needed (no additional computation or fine tuning)
+2)RAG :-
+-Uses external knowledge base (FM doesnt need to know everything , less complex)
+-No FM changes ( no additional fine tuning)
+3)Instruction based fine tuning :-
+-FM is fine tuned with specific instructions (requires additional computation)
+4)Domain adoptation fine tuning (most expensive) :-
+-Model is trained on a specific dataset(requires intensive computation)
+
+Bedrock cost savings :-
+On demand - great for unpredictable workloads  , no long term commitement
+Batch - provides upto 50 % discoount
+Provisioned throughput - not as a cost saving measure , as we are reervsing capacity
+Model size - smaller the model , cheaper it is
+Number of input output tokens :- main driver of cost
+
+Amazon Nova :-
+Family of foundation models built by AWS
+
+Understanding Category models :-
+1)Nova premier :- most capable of amazons multimodal models
+-Can be used as teacher model for distilling custom models
+2)Nova pro :- highly capable.Best combination of accuracy speed and cost
+3)Nova lite :- very low cost .Can process image , video and input text
+4)Nova micro :- Text only model.very low cost
+
+Creative category models:-
+1)Nova canvas :-  Image generation model
+2)Nova Reel :- video generation model
+
+Speech category model :-
+1)Nova sonic - Conversational speech understanding and generation in multiple languages
+
+Amazon Nova 2 :-
+New model used to build AI apps
+-Build Interactive AI apps , analyze documents , and video and create AI agents
+-Upti 1M tokens in context
+
+Nova 2 lite :- fast and cost efective for everyday workloads (texts , emages , videos documents)
+
+Nova 2 sonic :- speech to speech
+
+Nova 2 Multimodal embeddings :- Used for agentic RAG and semantic seacrh apps
+
+Nova 2 omni - ALl in one model for reasoning and image generation
+
+You are developing a model and want to ensure the outputs are adapted to your users. Which method do you recommend?
+
+-Human evaluation
+
+Prompt ENgineering Techniques :-
+1)Enhanced Prompt :-
+-Giving as much as details , to get a perfect response
+
+2)Negative prompt :-
+-A technique where you explicityly instruct a model to what not to do .
+FOr example . Make sure you do not give me explanations , just give me the exact mcq answer
+-Helps avoid unwanted context
+-Maintains focus
+-Enhance clarity
+
+Prompt Performance Optimization :-
+In Amazon Bedrock, Top‑K and Top‑P are text generation sampling parameters that control how the model chooses the next token during generation. They directly affect creativity, randomness, and determinism of the output.
+
+1)System prompts :- set how the model should behave and repsonse
+2)Temperature (0 - 1) :- Creativity of the models output
+-Low(eg.0.2) :- outputs are more conservative , focused on most likely response
+-High(eg.1.0) :- Outputs are more diverse , creative and unpredicatable
+
+3)Top P (0 to 1) :- considers most likely words as a distribution
+-Low(eg.0.2) :- Most likely response
+-High(eg.1.0) :- Consider a broad range of possible words , more creative
+
+4) Top K :- Limits the number of probable words
+Low(eg.10) :- Youll get top 10 most probable words , more coherent(Coherent means clear, logical, and easy to understand, with all parts fitting together in a sensible way.) reponse
+High(eg.500) :- more probable words , more diverse and creative
+
+Length :- set maximum length of answer
+
+Stop sequences :-   Tokens that signal the model to stop generating output
+
+Prompt Latency :- Latency means how fast the model responds 
+Its impacted by a few params :-
+1)The model size
+2)THe model type itself
+3)Number of tokens in input
+
+Latency is not impacted by top P , top K or tempaerature
+
+Prompt engineering techniques :-
+1)Zero shot prompting :- Present a task to the model without providing examples or explicit 
+training for that specific task
+-Here you fully rely on models general knowledge.
+-The larger and capable the model , more better the response is
+
+2)Few shots prompting :-
+-Provide examples of task to the model
+-We provide a few shots to the model to perform the task
+-If you provide only 1 example , its one shot or single shot
+
+3)CHain of though prompting :-
+-Divide a task into sequence of reasoning steps , leading to more structure and coherence
+-Using a sentence "use step by step"
+-Can be combined with zero shot or single shot prompting
+
+4)Retrieval Augmented Generation RAG:-
+-COmbine models capability with external sources of data
+-THe initial prompt is then augmented with external information
+
+Prompt templates :-
+SIimplify the process of generating prompts
+
+
+
+
+
+
+
+
 
 
 
