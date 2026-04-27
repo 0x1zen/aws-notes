@@ -502,8 +502,88 @@ training for that specific task
 -THe initial prompt is then augmented with external information
 
 Prompt templates :-
-SIimplify the process of generating prompts
+Simplify the process of generating prompts
 
+Amazon Q Business :-
+
+-Fully managed GEN-AI assistant for your employees
+-Based on your company's knowlegde and data
+-Answer questions , provide summaries , generate content , automate tasks
+-perform routine actions 
+
+Amazon Q Business is built on top of amazon bedrock , but you ant choose a FM model here
+
+Data connectors (Fully managed RAG):-
+Connects to 40+ popular enterprise data soources like S3 , RDS , aurora , Workdocs
+-Microsoft 365 , slack , GDRIVE , gmail , salesforce
+
+-Plugins - allows your to interact with 3rd party services
+for eg.Jira , servicenow , zendesk ,salesforce etc
+
+-Custom Plugins :- connects to any thrid party application using API's
+
+AMazon Q Business + IAM identity center :-
+-Users can be authenticated thorugh IAM identity center
+-Users receive responses generated only from documents they have access
+-IAM identity center can be configured with external identity providers like Micorsoft active directory , google login etc
+
+Amazon Q Business - Admin controls
+
+-Controls and customize responses to your organizational needs
+-Admin contrrols == gaurdrails
+
+-Repond only with internal info (vs using external knowledge)
+-We can setup global controls as well as topic level controls
+
+
+Amazon Q Apps :-
+-Create GEN AI powered apps without coding by using natural language
+-These apps are based on your company data
+-Possibility to leverage plugins like Jira
+
+Amazon Q Developer (rebranded as "Kiro") :-
+-Answers questions about AWS documentations and AWS service selection
+-Answers questions about resources in your AWS account
+-It can suggest CLI commands to run to make changes to your account
+-Helps you do bill analysis , resolve erros , trouble shooting etc
+
+The other side of amazon Q developer(Kiro) :-
+-AI code companion to help you develope new apps(similar to github copilot)
+-Specialized for AWS ecosystem
+-SUpports many langauges
+-Real time code suggestions and security scans
+
+Amazon Q developer IDE extensions :-
+-Integrates with IDE to help with your software development needs
+-Answers questions about aws development
+-Scan code for security
+-Debugging and optimizations
+-COde completions and generations
+
+Amazon Q for quicksight :-
+
+-Amazon quicksight is used to visualize your data and createdashboards out of them
+-Amazon Q understands natural language that you use to ask questions about your data
+-Create executive summaries of your data
+-Ask and answer questions of data
+-Generate and edit visuals for your dashboard
+
+Amazon Q for EC2 :-
+-Provides guidance and suggestions for type of ec2 instance that you need
+-WHich is suited for your workspace
+
+Amazon Q for AWS chatbot :-
+-AWS chatbot is a way to deploy a chatbot to slack or teams that knows about your aws account
+-Amazon Q is directly integrated in chatbot that u can use for clarifications
+
+Amazon Q for GLUE :-
+-AWS glue is a ETL ( extract transform load) service used to move data accross places
+-Helps with code generation and trouble shooting
+
+Party rock :-
+-GenAI app building playground (powered by amazon bedrock)
+-We can use it without even having a aws account
+-
 
 
 
