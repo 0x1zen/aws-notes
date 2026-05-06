@@ -583,8 +583,16 @@ Amazon Q for GLUE :-
 Party rock :-
 -GenAI app building playground (powered by amazon bedrock)
 -We can use it without even having a aws account
--
 
+AI And Machine Learning :-
+
+AI is a broad field for the development of intelligent systems capable of performing tasks
+that require human intelligence.
+
+Ai Components :-
+1)Data layer :- collect vast amounts of data
+2)ML framework and algorithm layer :- Data sceintists , and engineers work together to undertsnad use cases , requirements and frameworks.
+3)Model Layer :- Implement a model and train it
 
 
 
